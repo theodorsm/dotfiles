@@ -9,7 +9,7 @@
 super + Return
 	termite
 #lock 
-super + ctrl + l  
+super + Delete  
     systemctl suspend  
 # browser
 super + shift + Return 

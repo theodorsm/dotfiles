@@ -1,7 +1,8 @@
 #! /bin/sh
 
 sxhkd &
-bspc monitor -d 1 2 3 4 5  
+bspc monitor eDP-1 -d 1 2 3 4 5  
+bspc monitor DP-1 -d 6 7 8 9 
 
 bspc config border_width         2
 bspc config window_gap          12

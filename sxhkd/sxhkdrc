@@ -137,3 +137,13 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+   
+# remove gaps 
+super + alt + 0  
+    bspc config window_gap 0
+
+# add gap 
+
+super + alt + 1
+    bspc config window_gap 12
+

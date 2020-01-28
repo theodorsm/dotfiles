@@ -115,3 +115,4 @@ ZSH_HIGHLIGHT_STYLES[arg0]=fg=white
 
 #remove the % sign 
 PROMPT_EOL_MARK=''
+export EDITOR=vim

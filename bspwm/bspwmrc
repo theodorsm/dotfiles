@@ -22,7 +22,7 @@ bspc rule -a Screenkey manage=off
 bspc rule -a dolphin state=floating 
 bspc config focus_follows_pointer true 
 setxkbmap no 
-feh --bg-scale ~/Pictures/LightWaves.png 
+feh --bg-scale ~/.local/share/wallpapers/Blue\ And\ Purple\ No\ Logo.png 
 ~/.config/polybar/launch.sh
 compton
 xidlehook --not-when-fullscreen --not-when-audio --timer 600 'systemctl suspend' ''

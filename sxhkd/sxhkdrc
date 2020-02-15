@@ -16,7 +16,7 @@ super + shift + Return
 	chromium
 
 # program launcher
-super + @space
+super + space
 	rofi -show drun -show-icons
 # launcher
 super + shift + @space 

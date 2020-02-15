@@ -106,7 +106,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias ll="exa --long"
-
+alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -119,3 +119,4 @@ ZSH_HIGHLIGHT_STYLES[arg0]=fg=white
 #remove the % sign 
 PROMPT_EOL_MARK=''
 export EDITOR=vim
+export PASSWORD_STORE_DIR="/home/theodor/prog/password-store"

@@ -11,7 +11,7 @@ cursor_blink = system
 cursor_shape = line 
 dynamic_title = true
 filter_unmatched_urls = true
-font = Inconsolata Nerd Font 14
+font = MesloLGS NF 12 
 geometry = 480x280
 icon_name = terminal
 modify_other_keys = false
@@ -30,7 +30,7 @@ highlight = #30343e
 # Base16 Brewer
 # Scheme: Timothée Poisot (http://github.com/tpoisot)
 foreground=#b7b8b9
-background=#0F111A
+background=#090B10
 cursor_foreground=#0F111A
 cursor=#dca060
 

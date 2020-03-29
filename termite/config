@@ -8,7 +8,7 @@ audible_bell = true
 browser = xdg-open
 clickable_url = true
 cursor_blink = system
-cursor_shape = line 
+cursor_shape = block
 dynamic_title = true
 filter_unmatched_urls = true
 font = Inconsolata Nerd Font 14
@@ -30,9 +30,10 @@ highlight = #30343e
 # Base16 Brewer
 # Scheme: Timothée Poisot (http://github.com/tpoisot)
 foreground=#b7b8b9
-background=#0F111A
-cursor_foreground=#0F111A
-cursor=#dca060
+# Custom background to mach ayu theme
+background=#1F2430
+cursor=#b7b8b9
+cursor_foreground=#1F2430
 
 color0=#0c0d0e
 color1=#e31a1c

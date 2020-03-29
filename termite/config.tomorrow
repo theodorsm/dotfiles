@@ -11,7 +11,7 @@ cursor_blink = system
 cursor_shape = block
 dynamic_title = true
 filter_unmatched_urls = true
-font = MesloLGS NF 12 
+font = Inconsolata Nerd Font 14
 geometry = 480x280
 icon_name = terminal
 modify_other_keys = false
@@ -26,26 +26,24 @@ highlight = #30343e
 
 [colors]
 
-# https://github.com/mashaal/wild-cherry
+# http://chriskempson.github.io/base16/#tomorrow
+background=#1d1f21
+foreground=#c5c8c6
+cursor=#c5c8c6
 
-background= #1F1626
-#background=rgba(31,22,38,0.9)
-foreground= #FFFFFF
-cursor=     #0F9DBA
-
-color0=   #099BD7
-color10=  #2AB250
-color11=  #FFD16F
-color12=  #883CDB
-color13=  #099BD7
-color14=  #4F5D95
-color15=  #FFF8DE
-color1=   #D94085
-color2=   #2AB250
-color3=   #FFD16F
-color4=   #883CDC
-color5=   #0F9DBA
-color6=   #4F5D95
-color7=   #FFF8DD
-color8=   #099BD7
-color9=   #D94084
+color0=#1d1f21
+color1=#cc6666
+color2=#b5bd68
+color3=#f0c674
+color4=#81a2be
+color5=#b294bb
+color6=#8abeb7
+color7=#c5c8c6
+color9=#969896
+color8=#cc6666
+color10=#b5bd68
+color11=#f0c674
+color12=#81a2be
+color13=#b294bb
+color14=#8abeb7
+color15=#ffffff

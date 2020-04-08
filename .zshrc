@@ -25,7 +25,7 @@ alias tmux="tmux -u" # color-fix in termite
 alias lego-builds="~/dotfiles/scripts/tmux-lego.sh"
 
 #ctf-alias
-alias stego-docker="docker run -it --rm -v $(pwd)/data:/data dominicbreuker/stego-toolkit /bin/bash"
+alias stego-docker="$HOME/dotfiles/scripts/stego-docker.sh"
 alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 
 #fix - remove the % sign

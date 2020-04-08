@@ -21,10 +21,12 @@ KEYTIMEOUT=1
 
 # aliases
 alias ll="exa --long"
-alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 alias tmux="tmux -u" # color-fix in termite
 alias lego-builds="~/dotfiles/scripts/tmux-lego.sh"
 
+#ctf-alias
+alias stego-docker="docker run -it --rm -v $(pwd)/data:/data dominicbreuker/stego-toolkit /bin/bash"
+alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 
 #fix - remove the % sign
 PROMPT_EOL_MARK=''

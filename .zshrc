@@ -23,6 +23,9 @@ KEYTIMEOUT=1
 alias ll="exa --long"
 alias tmux="tmux -u" # color-fix in termite
 alias lego-builds="~/dotfiles/scripts/tmux-lego.sh"
+alias vrc="vim ~/.vimrc"
+alias zrc="vim ~/.zshrc"
+alias dotf="ranger ~/dotfiles"
 
 #ctf-alias
 alias stego-docker="$HOME/dotfiles/scripts/stego-docker.sh"

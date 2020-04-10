@@ -8,9 +8,7 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="/home/theodor/.oh-my-zsh"
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf)
-
-source $ZSH/oh-my-zsh.sh
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf) source $ZSH/oh-my-zsh.sh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 ZSH_HIGHLIGHT_STYLES[precommand]=fg=white
 ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=white
@@ -25,7 +23,10 @@ alias tmux="tmux -u" # color-fix in termite
 alias lego-builds="~/dotfiles/scripts/tmux-lego.sh"
 alias vrc="vim ~/.vimrc"
 alias zrc="vim ~/.zshrc"
-alias dotf="ranger ~/dotfiles"
+alias prc="vim ~/.p10k.zsh"
+alias vifm="vifmrun"
+alias dotf="vifm ~/dotfiles"
+alias prog="vifm ~/prog"
 
 #ctf-alias
 alias stego-docker="$HOME/dotfiles/scripts/stego-docker.sh"

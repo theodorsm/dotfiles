@@ -27,6 +27,7 @@ alias prc="vim ~/.p10k.zsh"
 alias vifm="vifmrun"
 alias dotf="vifm ~/dotfiles"
 alias prog="vifm ~/prog"
+alias pyvenv="python -m venv venv && source venv/bin/activate"
 
 #ctf-alias
 alias stego-docker="$HOME/dotfiles/scripts/stego-docker.sh"

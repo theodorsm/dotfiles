@@ -82,6 +82,6 @@ let colorspace=256  " Access colors present in 256 colorspace
 "let g:airline_theme='ayu_mirage'
 set background=dark
 colorscheme palenight
-autocmd VimEnter * highlight Normal guibg=#1F2430 gui=NONE
+autocmd VimEnter * highlight Normal guibg=#141A21 gui=NONE
 
 

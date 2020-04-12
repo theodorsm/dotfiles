@@ -30,8 +30,8 @@ highlight = #30343e
 # Base16 Brewer
 # Scheme: Timothée Poisot (http://github.com/tpoisot)
 foreground=#b7b8b9
-# Custom background to mach ayu theme
-background=#1F2430
+# Custom background to mach aritim theme
+background=#141A21
 cursor=#b7b8b9
 cursor_foreground=#1F2430
 

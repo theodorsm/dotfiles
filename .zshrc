@@ -34,7 +34,10 @@ alias stego-docker="$HOME/dotfiles/scripts/stego-docker.sh"
 alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 
 #fix - remove the % sign
-PROMPT_EOL_MARK=''
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+setopt PROMPT_CR
+setopt PROMPT_SP
+export PROMPT_EOL_MARK=""
 
 # exports
 export EDITOR=vim

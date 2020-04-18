@@ -12,7 +12,6 @@ cursor_shape = block
 dynamic_title = true
 filter_unmatched_urls = true
 font = Inconsolata Nerd Font 14
-geometry = 480x280
 icon_name = terminal
 modify_other_keys = false
 mouse_autohide = false
@@ -32,6 +31,7 @@ highlight = #30343e
 foreground=#b7b8b9
 # Custom background to mach aritim theme
 background=#141A21
+#background = rgba(31,26,33,0.8)
 cursor=#b7b8b9
 cursor_foreground=#1F2430
 

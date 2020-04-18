@@ -2,10 +2,11 @@
 monitor = eDP-1
 width = 100%
 height = 34
-
 background = #00000000
 foreground = #ccffffff
 
+wm-restack = bspwm
+override-redirect = true
 line-color = ${bar/bottom.background}
 line-size = 16
 

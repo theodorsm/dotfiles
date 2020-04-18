@@ -15,12 +15,12 @@ set shiftwidth=4
 set expandtab
 set cursorline
 set autoindent
-set nocompatible              " be iMproved, required
+set nocompatible
 set encoding=utf-8
 set mouse=a
-"set nowrap
 set timeoutlen=1000 ttimeoutlen=0
 set viminfo+=n~/.vim/viminfo
+set colorcolumn=80
 let g:indentLine_setColors = 2
 let python_highlight_all = 1
 let g:javascript_plugin_jsdoc = 1
@@ -40,16 +40,17 @@ nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-j> :tabprevious<CR>
 nnoremap <C-k> :tabnext<CR>
 autocmd FileType python map <buffer> <F10> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd BufWritePost *.py call flake8#Flake8()
 
 call plug#begin()
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
-Plug 'prettier/vim-prettier'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'preservim/nerdtree'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'ycm-core/YouCompleteMe'
+Plug 'nvie/vim-flake8'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'sheerun/vim-polyglot'
@@ -82,6 +83,7 @@ let colorspace=256  " Access colors present in 256 colorspace
 "let g:airline_theme='ayu_mirage'
 set background=dark
 colorscheme palenight
+"hi Normal guibg=NONE ctermbg=NONE
 autocmd VimEnter * highlight Normal guibg=#141A21 gui=NONE
 
 

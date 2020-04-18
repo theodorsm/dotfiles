@@ -13,7 +13,7 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 bspc rule -a Gimp desktop='^4' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
+#bspc rule -a Chromium ='^2'
 bspc rule -a slack desktop='^2'
 bspc rule -a code-oss desktop='^3'
 bspc rule -a Eclipse desktop='^3'
@@ -24,9 +24,9 @@ bspc rule -a Screenkey manage=off
 bspc rule -a dolphin state=floating 
 bspc rule -a app.App state=floating
 bspc config focus_follows_pointer true 
-setxkbmap no 
-feh --bg-scale ~/Pictures/nightwatch.jpg 
+setxkbmap eu 
+feh --bg-scale ~/Pictures/4kwall.jpg 
 ~/.config/polybar/launch.sh
 compton
 xidlehook --not-when-fullscreen --not-when-audio --timer 600 'systemctl suspend' ''
-
+xdo above -t $(xdo id -n root) $(xdo id -n polybar)

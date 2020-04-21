@@ -1,7 +1,5 @@
 #! /bin/sh
-
-sxhkd &
-bspc monitor eDP-1 -d 1 2 3 4 5  
+sxhkd & bspc monitor eDP-1 -d 1 2 3 4 5  
 bspc monitor DP-1 -d 6 7 8 9 
 bspc monitor DP-2 -d 6 7 8 9 
 
@@ -24,9 +22,14 @@ bspc rule -a Screenkey manage=off
 bspc rule -a dolphin state=floating 
 bspc rule -a app.App state=floating
 bspc config focus_follows_pointer true 
-setxkbmap eu 
+setxkbmap eu
 feh --bg-scale ~/Pictures/4kwall.jpg 
 ~/.config/polybar/launch.sh
 compton
 xidlehook --not-when-fullscreen --not-when-audio --timer 600 'systemctl suspend' ''
-xdo above -t $(xdo id -n root) $(xdo id -n polybar)
+#touchpad
+xinput set-prop 11 "libinput Tapping Enabled" 1
+xinput set-prop 11 "libinput Natural Scrolling Enabled" 1
+#fix java stuff
+wmname LG3D
+

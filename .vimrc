@@ -9,7 +9,8 @@
 "
 syntax on
 so ~/dotfiles/.coc.vim
-set number relativenumber
+set number
+set nu
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -29,6 +30,7 @@ let g:python_highlight_space_errors=0
 let g:NERDTreeMouseMode=3
 let g:indentLine_fileTypeExclude = ['markdown']
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'bash']
+let g:airline_powerline_fonts = 0
 filetype indent on
 filetype off                  " required
 
@@ -59,7 +61,7 @@ Plug 'hdima/python-syntax'
 Plug 'tpope/vim-fugitive'
 Plug 'git://git.wincent.com/command-t.git'
 Plug 'airblade/vim-gitgutter'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
+"Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'}
 Plug 'chriskempson/base16-vim'

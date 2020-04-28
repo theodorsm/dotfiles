@@ -1,0 +1,7 @@
+; Workaround for using a module separator with a different foreground color than
+; the one defined for the whole bar.
+[module/sep]
+type = custom/text
+content = |
+content-foreground = ${colors.trans}
+content-padding = 1

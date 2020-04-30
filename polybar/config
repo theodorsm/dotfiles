@@ -58,7 +58,7 @@ cursor-scroll = ns-resize
 
 [bar/secondary]
 width = 100%
-height = 32
+height = 30
 bottom = false
 fixed-center = true
 wm-restack = bspwm

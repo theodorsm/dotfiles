@@ -2,11 +2,12 @@
 type = internal/date
 interval = 1
 
-time = "%H:%M"
-time-alt = " %a, %b %d %H:%M"
+time = " %H:%M "
+time-alt = " %a, %b %d %H:%M "
 
-format-padding = 1
-format-prefix = %{T2}%{T-}
-format-prefix-foreground = ${colors.nord-blue-light}
+format-padding = 0
+format-prefix = %{T3}%{T-}
+format-prefix-foreground = ${colors.fg}
 label = %{T2}%time%%{T-}
-label-foreground = ${colors.nord-blue-light}
+label-foreground = ${colors.bg}
+label-background = #5B6ABF

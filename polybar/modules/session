@@ -2,6 +2,6 @@
 type = custom/script
 
 click-left = bash ~/.config/polybar/scripts/powermenu
-exec = echo %{T3}  %{T-}
-;format-background = ${colors.nord-red}
-format-foreground = ${colors.white}
+exec = echo %{T3}"  " %{T-}
+format-background = #5B6ABF
+format-foreground = ${colors.bg}

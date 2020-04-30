@@ -1,0 +1,12 @@
+configuration {
+  show-icons:         true;
+  icon-theme:         "Paper";
+  cycle:              true;
+  hide-scrollbar:     true;
+  disable-history:    false;
+  modi:               "drun";
+  display-drun:       "apps";
+  font: "Open Sans 18";
+  columns: 2;
+}
+@import "/usr/share/rofi/themes/android_notification.rasi"

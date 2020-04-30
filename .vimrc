@@ -12,7 +12,7 @@ so ~/dotfiles/.coc.vim
 set number
 set nu
 set tabstop=4
-set shiftwidth=4
+set shiftwidth=4 
 set expandtab
 set cursorline
 set autoindent
@@ -87,5 +87,3 @@ set background=dark
 colorscheme palenight
 "hi Normal guibg=NONE ctermbg=NONE
 autocmd VimEnter * highlight Normal guibg=#141A21 gui=NONE
-
-

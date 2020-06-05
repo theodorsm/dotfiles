@@ -12,6 +12,7 @@ cursor_shape = block
 dynamic_title = true
 filter_unmatched_urls = true
 font = Inconsolata Nerd Font 14
+geometry = 480x280
 icon_name = terminal
 modify_other_keys = false
 mouse_autohide = false
@@ -25,36 +26,34 @@ highlight = #30343e
 
 [colors]
 
-# https://github.com/chriskempson/base16-xresources/blob/master/base16-brewer.dark.256.xresources
-# Base16 Brewer
-# Scheme: Timothée Poisot (http://github.com/tpoisot)
-foreground=#b7b8b9
-# Custom background to mach aritim theme
-background=#141A21
-#background = rgba(31,26,33,0.8)
-cursor=#b7b8b9
-cursor_foreground=#1F2430
+# https://github.com/chriskempson/base16-xresources/blob/master/base16-tomorrow.dark.256.xresources
+# Base16 Tomorrow
+# Scheme: Chris Kempson (http://chriskempson.com)
+foreground=#c5c8c6
+background=#1d1f21
+cursor=#c5c8c6
+cursor_foreground=#1d1f21
 
-color0=#0c0d0e
-color1=#e31a1c
-color2=#31a354
-color3=#dca060
-color4=#3182bd
-color5=#756bb1
-color6=#80b1d3
-color7=#b7b8b9
-color8=#737475
-color9=#e31a1c
-color10=#31a354
-color11=#dca060
-color12=#3182bd
-color13=#756bb1
-color14=#80b1d3
-color15=#fcfdfe
+color0=#1d1f21
+color1=#cc6666
+color2=#b5bd68
+color3=#f0c674
+color4=#81a2be
+color5=#b294bb
+color6=#8abeb7
+color7=#c5c8c6
+color8=#969896
+color9=#cc6666
+color10=#b5bd68
+color11=#f0c674
+color12=#81a2be
+color13=#b294bb
+color14=#8abeb7
+color15=#ffffff
 
-color16=#e6550d
-color17=#b15928
-color18=#2e2f30
-color19=#515253
-color20=#959697
-color21=#dadbdc
+color16=#de935f
+color17=#a3685a
+color18=#282a2e
+color19=#373b41
+color20=#b4b7b4
+color21=#e0e0e0

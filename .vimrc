@@ -12,7 +12,7 @@ so ~/dotfiles/.coc.vim
 set number
 set nu
 set tabstop=4
-set shiftwidth=4 
+set shiftwidth=4
 set expandtab
 set cursorline
 set autoindent
@@ -31,6 +31,8 @@ let g:NERDTreeMouseMode=3
 let g:indentLine_fileTypeExclude = ['markdown']
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'bash']
 let g:airline_powerline_fonts = 0
+"let &t_SI = "\e[5 q"
+"let &t_EI = "\e[2 q"
 filetype indent on
 filetype off                  " required
 
@@ -65,6 +67,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'}
 Plug 'chriskempson/base16-vim'
+Plug 'flazz/vim-colorschemes'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'hzchirs/vim-material'
 Plug 'ayu-theme/ayu-vim'
@@ -84,6 +87,6 @@ let colorspace=256  " Access colors present in 256 colorspace
 "colorscheme ayu
 "let g:airline_theme='ayu_mirage'
 set background=dark
-colorscheme palenight
+colorscheme base16-tomorrow-night
 "hi Normal guibg=NONE ctermbg=NONE
-autocmd VimEnter * highlight Normal guibg=#141A21 gui=NONE
+"autocmd VimEnter * highlight Normal guibg=#141A21 gui=NONE

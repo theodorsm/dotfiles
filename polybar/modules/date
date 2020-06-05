@@ -10,4 +10,4 @@ format-prefix = %{T3}%{T-}
 format-prefix-foreground = ${colors.fg}
 label = %{T2}%time%%{T-}
 label-foreground = ${colors.bg}
-label-background = #5B6ABF
+label-background = ${colors.nord-yellow}

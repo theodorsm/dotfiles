@@ -9,4 +9,4 @@ configuration {
   font: "Open Sans 14";
   columns: 2;
 }
-@import "/usr/share/rofi/themes/android_notification.rasi"
+@import "/usr/share/rofi/themes/gruvbox-dark.rasi"

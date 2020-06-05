@@ -1,6 +1,6 @@
 #! /bin/bash
 setxkbmap eu &
-feh --bg-scale ~/Pictures/vibrant_smoke.png &
+feh --bg-scale ~/Pictures/mountains_fog_sky_116917_3840x2160.jpg &
 ~/.config/polybar/launch.sh &
 compton &
 xidlehook --not-when-fullscreen --not-when-audio --timer 600 'systemctl suspend' '' &

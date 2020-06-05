@@ -15,8 +15,8 @@ interval = 3
 ;   <bar-swap-free>
 ;   <ramp-swap-used>
 ;   <ramp-swap-free>
-format = %{T2}<label>%{T-}
-format-foreground = ${colors.nord-blue-light}
+format = %{T3}<label>%{T-}
+format-foreground = ${colors.fg}
 format-prefix = 
 ; Available tokens:
 ;   %percentage_used% (default)

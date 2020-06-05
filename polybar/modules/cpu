@@ -11,8 +11,8 @@ interval = 1
 ;   <ramp-load>
 ;   <ramp-coreload>
 ;;format = <label> <ramp-coreload>
-format = %{T2}<label>%{T-}
-format-foreground = ${colors.nord-blue-light}
+format = %{T3}<label>%{T-}
+format-foreground = ${colors.fg}
 ;format-prefix = %{T3}%{T-}
 
 

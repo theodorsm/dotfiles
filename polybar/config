@@ -37,7 +37,7 @@ monitor = eDP-1
 fixed-center = true
 wm-restack = bspwm
 
-background = ${colors.semi-trans}
+background = #1D1F21
 foreground = ${colors.fg}
 
 font-0 = "Inconsolata Nerd Font:style=Medium:size=14;2"
@@ -65,7 +65,7 @@ wm-restack = bspwm
 monitor = DP-1
 monitor-fallback = DP-2
 
-background = ${colors.semi-trans}
+background = #1D1F21
 foreground = ${colors.fg}
 
 font-0 = "Inconsolata Nerd Font:style=Medium:size=14;2"

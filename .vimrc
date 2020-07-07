@@ -45,6 +45,7 @@ nnoremap <C-j> :tabprevious<CR>
 nnoremap <C-k> :tabnext<CR>
 autocmd FileType python map <buffer> <F10> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd BufWritePost *.py call flake8#Flake8()
+autocmd BufWritePost *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 call plug#begin()
 Plug 'Yggdroot/indentLine'
@@ -75,6 +76,7 @@ Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'mhartington/oceanic-next'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()            " required
 filetype plugin indent on    " required
 

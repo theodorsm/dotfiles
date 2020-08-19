@@ -1,13 +1,19 @@
 #! /bin/bash
 
 setxkbmap eu &
-feh --bg-scale ~/Pictures/mountains_fog_sky_116917_3840x2160.jpg &
+feh --bg-scale ~/Pictures/moon.jpg
 
 # second monitor setup
-if xrandr --listactivemonitors | grep "1440"; then
-    xrandr --output DP-1 --mode 2560x1440 --rate 99.95
-    xrandr --output eDP-1 --primary --mode 1920x1080 --pos 320x1440 --rotate normal --output DP-1 --mode 2560x1440 --pos 0x0 --rotate normal --output DP-2 --off
-fi &
+monitors=$(xrandr --listactivemonitors)
+if [echo $monitors | grep "1440"] && [echo $monitors | "DP1"]
+then
+    xrandr --output DP1 --mode 2560x1440 --rate 143.86
+    xrandr --output eDP1 --primary --mode 1920x1080 --pos 320x1440 --rotate normal --output DP1 --mode 2560x1440 --pos 0x0 --rotate normal
+elif [echo $monitors | grep "1440"] && [echo $monitors | "DP2"]
+then
+    xrandr --output DP2 --mode 2560x1440 --rate 143.86
+    xrandr --output eDP1 --primary --mode 1920x1080 --pos 320x1440 --rotate normal --output DP2 --mode 2560x1440 --pos 0x0 --rotate normal
+fi
 
 ~/.config/polybar/launch.sh &
 compton &

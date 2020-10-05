@@ -31,6 +31,7 @@ let g:NERDTreeMouseMode=3
 let g:indentLine_fileTypeExclude = ['markdown']
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'bash']
 let g:airline_powerline_fonts = 0
+let g:ale_linters = {'javascript': ['eslint', 'flow']}
 "let &t_SI = "\e[5 q"
 "let &t_EI = "\e[2 q"
 filetype indent on
@@ -44,9 +45,13 @@ nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-j> :tabprevious<CR>
 nnoremap <C-k> :tabnext<CR>
 autocmd FileType python map <buffer> <F10> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType c map <buffer> <F10> :w<CR>:!gcc % -o %< && ./%< <CR>
+autocmd FileType c setlocal ts=4 sw=4
+autocmd FileType go setlocal ts=4 sw=4
 autocmd BufWritePost *.py call flake8#Flake8()
 autocmd BufWritePost *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
+"plugins
 call plug#begin()
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf.vim'
@@ -64,7 +69,6 @@ Plug 'hdima/python-syntax'
 Plug 'tpope/vim-fugitive'
 Plug 'git://git.wincent.com/command-t.git'
 Plug 'airblade/vim-gitgutter'
-"Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'}
 Plug 'chriskempson/base16-vim'
@@ -80,15 +84,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()            " required
 filetype plugin indent on    " required
 
-"let g:coc_node_path='/usr/bin/node'
-
 "colorscheme
 set termguicolors
-let colorspace=256  " Access colors present in 256 colorspace
-"let ayucolor="mirage"
-"colorscheme ayu
-"let g:airline_theme='ayu_mirage'
+let colorspace=256
 set background=dark
 colorscheme base16-tomorrow-night
-"hi Normal guibg=NONE ctermbg=NONE
-"autocmd VimEnter * highlight Normal guibg=#141A21 gui=NONE

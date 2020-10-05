@@ -47,6 +47,7 @@ nnoremap <C-k> :tabnext<CR>
 autocmd FileType python map <buffer> <F10> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType c map <buffer> <F10> :w<CR>:!gcc % -o %< && ./%< <CR>
 autocmd FileType c setlocal ts=4 sw=4
+autocmd FileType cpp setlocal ts=4 sw=4
 autocmd FileType go setlocal ts=4 sw=4
 autocmd BufWritePost *.py call flake8#Flake8()
 autocmd BufWritePost *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier

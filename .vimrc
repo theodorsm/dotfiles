@@ -8,7 +8,6 @@
 "                                          |___/
 "
 syntax on
-so ~/dotfiles/.coc.vim
 set number
 set nu
 set tabstop=2
@@ -38,7 +37,7 @@ filetype indent on
 filetype off                  " required
 
 "keybinds
-nmap <C-n> :NERDTreeToggle<CR>
+nmap <C-n> :CHADopen<CR>
 vnoremap <C-y> "+y
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
@@ -46,6 +45,7 @@ nnoremap <C-j> :tabprevious<CR>
 nnoremap <C-k> :tabnext<CR>
 autocmd FileType python map <buffer> <F10> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType c map <buffer> <F10> :w<CR>:!gcc % -o %< && ./%< <CR>
+autocmd FileType javascript map <buffer> <F10> :w<CR>:!node % <CR>
 autocmd FileType c setlocal ts=4 sw=4
 autocmd FileType cpp setlocal ts=4 sw=4
 autocmd FileType go setlocal ts=4 sw=4
@@ -53,23 +53,27 @@ autocmd BufWritePost *.py call flake8#Flake8()
 autocmd BufWritePost *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 "plugins
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin()
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'preservim/nerdtree'
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvie/vim-flake8'
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'sheerun/vim-polyglot'
 Plug 'pangloss/vim-javascript'
 Plug 'hdima/python-syntax'
 Plug 'tpope/vim-fugitive'
-Plug 'git://git.wincent.com/command-t.git'
 Plug 'airblade/vim-gitgutter'
+Plug 'git://git.wincent.com/command-t.git'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'}
 Plug 'chriskempson/base16-vim'
@@ -78,6 +82,7 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'hzchirs/vim-material'
 Plug 'ayu-theme/ayu-vim'
 Plug 'rakr/vim-one'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'mhartington/oceanic-next'
@@ -86,7 +91,36 @@ call plug#end()            " required
 filetype plugin indent on    " required
 
 "colorscheme
+set t_co=256
 set termguicolors
-let colorspace=256
 set background=dark
 colorscheme base16-tomorrow-night
+
+if !has('nvim')
+  set viminfo+=n~/.local/share/vim/viminfo
+endif
+
+" floating fzf
+if has('nvim')
+  let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
+
+  function! FloatingFZF()
+    let height = &lines
+    let width = float2nr(&columns - (&columns * 2 / 10))
+    let col = float2nr((&columns - width) / 2)
+    let col_offset = &columns / 10
+    let opts = {
+          \ 'relative': 'editor',
+          \ 'row': 1,
+          \ 'col': col + col_offset,
+          \ 'width': width * 2 / 1,
+          \ 'height': height / 2,
+          \ 'style': 'minimal'
+          \ }
+    let buf = nvim_create_buf(v:false, v:true)
+    let win = nvim_open_win(buf, v:true, opts)
+    call setwinvar(win, '&winhl', 'NormalFloat:TabLine')
+  endfunction
+
+  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+endif

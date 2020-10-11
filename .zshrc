@@ -18,6 +18,7 @@ ZSH_HIGHLIGHT_STYLES[arg0]=fg=white
 KEYTIMEOUT=1
 
 # aliases
+alias vim="nvim"
 alias ll="exa --long"
 alias tmux="tmux -u" # color-fix in termite
 alias lego-builds="~/dotfiles/scripts/tmux-lego.sh"

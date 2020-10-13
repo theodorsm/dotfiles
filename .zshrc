@@ -41,8 +41,8 @@ setopt PROMPT_SP
 export PROMPT_EOL_MARK=""
 
 # exports
-export EDITOR=vim
-export PASSWORD_STORE_DIR="/home/theodor/prog/password-store"
+export EDITOR=nvim
+export PASSWORD_STORE_DIR="/home/theodor/prog/webkom/password-store"
 export BSPWM_DIR="/home/theodor/.config/bspwm"
 export TERM=xterm-256color
 export LC_ALL=en_US.UTF-8

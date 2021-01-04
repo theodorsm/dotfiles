@@ -10,3 +10,7 @@
 - Compositor: picom
 - Launcher: rofi
 - Editor: nvim
+
+## TODO
+
+- [ ] Add setup script

@@ -18,14 +18,14 @@ enable-click = false
 ; Default: true
 enable-scroll = false
 
-; Set the scroll cycle direction 
+; Set the scroll cycle direction
 ; Default: true
 reverse-scroll = false
 
 
-; Use fuzzy (partial) matching on labels when assigning 
+; Use fuzzy (partial) matching on labels when assigning
 ; icons to workspaces
-; Example: code;♚ will apply the icon to all workspaces 
+; Example: code;♚ will apply the icon to all workspaces
 ; containing 'code' in the label
 ; Default: false
 ;fuzzy-match = true
@@ -85,7 +85,7 @@ label-focused-underline = #ffffff
 ;   %index%
 ; Default: %icon%  %name%
 label-occupied = %icon% %name%
-label-occupied-foreground= ${colors.nord-yellow}
+label-occupied-foreground= ${colors.nord-purple}
 
 
 ; Available tokens:
@@ -127,4 +127,3 @@ label-empty-foreground = #55
 label-separator = |
 label-separator-padding = 1
 label-separator-foreground = ${colors.trans}
-

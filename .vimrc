@@ -35,10 +35,11 @@ let g:ale_fixers = {
 \ '*': ['remove_trailing_lines', 'trim_whitespace'],
 \ 'javascript': ['eslint', 'prettier'],
 \ 'python': ['black'],
+\ 'markdown': ['prettier'],
+\ 'yaml': ['prettier'],
 \}
+let g:ale_python_flake8_options = '--ignore=E501'
 let g:ale_disable_lsp = 1
-"let &t_SI = "\e[5 q"
-"let &t_EI = "\e[2 q"
 filetype indent on
 filetype off                  " required
 
@@ -47,8 +48,8 @@ nmap <C-n> :CHADopen<CR>
 vnoremap <C-y> "+y
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
-nnoremap <C-j> :tabprevious<CR>
-nnoremap <C-k> :tabnext<CR>
+nnoremap <C-j> :ALENext<CR>
+nnoremap <C-k> :ALEPrevious<CR>
 autocmd FileType python map <buffer> <F10> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType c map <buffer> <F10> :w<CR>:!gcc % -o %< && ./%< <CR>
 autocmd FileType javascript map <buffer> <F10> :w<CR>:!node % <CR>
@@ -93,11 +94,21 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'mhartington/oceanic-next'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()            " required
 filetype plugin indent on    " required
+
+let mapleader = " "
+
+" FZF
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
+" Git
+nnoremap <silent> <Leader>g :GFiles<CR>
 
 "colorscheme
 set t_co=256
@@ -110,29 +121,8 @@ if !has('nvim')
 endif
 
 " floating fzf
-if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8, 'highlight': 'Comment' } }
 
-  function! FloatingFZF()
-    let height = &lines
-    let width = float2nr(&columns - (&columns * 2 / 10))
-    let col = float2nr((&columns - width) / 2)
-    let col_offset = &columns / 10
-    let opts = {
-          \ 'relative': 'editor',
-          \ 'row': 1,
-          \ 'col': col + col_offset,
-          \ 'width': width * 2 / 1,
-          \ 'height': height / 2,
-          \ 'style': 'minimal'
-          \ }
-    let buf = nvim_create_buf(v:false, v:true)
-    let win = nvim_open_win(buf, v:true, opts)
-    call setwinvar(win, '&winhl', 'NormalFloat:TabLine')
-  endfunction
-
-  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-endif
 " ===================================================
 " NVIM lspconfig settings
 " ===================================================

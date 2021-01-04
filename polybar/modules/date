@@ -6,8 +6,8 @@ time = " %H:%M "
 time-alt = " %a, %b %d %H:%M "
 
 format-padding = 0
-format-prefix = %{T3}%{T-}
+format-prefix = %{T2}%{T-}
 format-prefix-foreground = ${colors.fg}
-label = %{T2}%time%%{T-}
+label = %{T1}%time%%{T-}
 label-foreground = ${colors.bg}
 label-background = ${colors.nord-blue}

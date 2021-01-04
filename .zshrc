@@ -29,6 +29,8 @@ alias vifm="vifmrun"
 alias dotf="vifm ~/dotfiles"
 alias prog="vifm ~/prog"
 alias pyvenv="python -m venv venv && source venv/bin/activate"
+alias ap="ansible-playbook"
+alias av="ansible-vault"
 
 #ctf-alias
 alias stego-docker="$HOME/dotfiles/scripts/stego-docker.sh"
@@ -47,4 +49,12 @@ export BSPWM_DIR="/home/theodor/.config/bspwm"
 export TERM=xterm-256color
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+# android-dev stuff
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export ANDROID_STUDIO="$HOME/builds/android-studio"
+export PATH=${PATH}:$ANDROID_STUDIO/bin
 
+# Created by `userpath` on 2020-12-23 14:33:35
+export PATH="$PATH:/home/theodor/.local/bin"

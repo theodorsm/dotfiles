@@ -9,4 +9,4 @@ configuration {
   font: "Open Sans 14";
   columns: 2;
 }
-@import "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"
+@import "/home/theodor/.local/share/rofi/themes/onedark.rasi"

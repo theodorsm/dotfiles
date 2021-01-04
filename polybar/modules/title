@@ -4,5 +4,6 @@ type = internal/xwindow
 format = <label>
 format-foreground = ${colors.white}
 format-padding = 1
-label = %{T2}%title%{T-}
-label-maxlen = 25
+label = [%title%]
+format-font = "Inconsolata Nerd Font:style=Bold:size=12;2"
+label-maxlen = 50

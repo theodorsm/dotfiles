@@ -1,7 +1,27 @@
 #! /bin/sh
-sxhkd & bspc monitor eDP1 -d 1 2 3 4 5
-bspc monitor DP1 -d 6 7 8 9
-bspc monitor DP2 -d 6 7 8 9
+
+# Launch keybinding
+sxhkd &
+
+# Second monitor setup
+monitors=$(xrandr --listactivemonitors)
+if echo $monitors | grep "1440" && echo $monitors | grep "DP2"; then
+    xrandr --output DP1 --mode 2560x1440 --rate 143.86
+#    xrandr --output eDP1 --primary --mode 1920x1080 --pos 320x1440 --rotate normal --output DP1 --mode 2560x1440 --pos 0x0 --rotate normal
+    bspc monitor DP1 -d 1 2 3 4 5
+    bspc monitor DP2 -d 6 7 8 9
+elif echo $monitors | grep "1440" && echo $monitors != "*DP2*"; then
+    bspc monitor DP1 -d 1 2 3 4 5
+    bspc monitor eDP1 -d 6 7 8 9
+elif echo $monitors | grep "1440" && echo $monitors != "*DP2*"; then
+    bspc monitor DP1 -d 1 2 3 4 5
+    bspc monitor eDP1 -d 6 7 8 9
+elif echo $monitors | grep "Monitors: 2"; then
+    bspc monitor DP2 -d 1 2 3 4 5
+    bspc monitor eDP1 -d 6 7 8 9
+elif echo $monitors != "*DP1*" && echo $monitors != "*DP2*"; then
+    bspc monitor eDP1 -d 1 2 3 4 5
+fi
 
 bspc config border_width         2
 bspc config window_gap          12
@@ -23,4 +43,4 @@ bspc rule -a Pavucontrol state=floating
 bspc rule -a dolphin state=floating
 bspc rule -a app.App state=floating
 
-/home/theodor/dotfiles/bspwm/startup.sh &
+/home/$USER/dotfiles/bspwm/startup.sh &

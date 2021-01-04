@@ -15,6 +15,7 @@ include-file = /home/$USER/.config/polybar/modules/lockscreen
 include-file = /home/$USER/.config/polybar/modules/memory
 include-file = /home/$USER/.config/polybar/modules/pulseaudio
 include-file = /home/$USER/.config/polybar/modules/session
+include-file = /home/$USER/.config/polybar/modules/spotify
 include-file = /home/$USER/.config/polybar/modules/temperature
 include-file = /home/$USER/.config/polybar/modules/title
 include-file = /home/$USER/.config/polybar/modules/window
@@ -37,7 +38,7 @@ monitor = eDP1
 fixed-center = true
 wm-restack = bspwm
 
-background = #1D1F21
+background = #001D1F21
 foreground = ${colors.fg}
 
 font-0 = "Inconsolata Nerd Font:style=Medium:size=14;2"
@@ -65,7 +66,7 @@ wm-restack = bspwm
 monitor = DP1
 monitor-fallback = DP2
 
-background = #1D1F21
+background = #661D1F21
 foreground = ${colors.fg}
 
 font-0 = "Inconsolata Nerd Font:style=Medium:size=14;2"
@@ -73,16 +74,45 @@ font-1 = "Inconsolata Nerd Font:style=Bold:size=12;2"
 font-2 = "Inconsolata Nerd Font:size=12;3"
 font-3 = "Inconsolata Nerd Font:size=16;4"
 
-modules-left = session bspwm
+modules-left = session bspwm date
 modules-center = title
-modules-right = cpu memory pulseaudio wlan battery date
+modules-right = spotify spotify-prev spotify-play-pause spotify-next sep cpu memory pulseaudio battery
 
 ;tray-background = ${colors.polar-night-2}
-tray-background = ${colors.semi-trans}
+tray-background = ${colors.nord-blue}
 tray-position = right
-tray-maxsize = 32
+tray-maxsize = 16
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+;spotify controls
+enable-ipc = true
+
+[bar/side]
+width = 100%
+height = 30
+bottom = false
+fixed-center = true
+wm-restack = bspwm
+monitor = DP2
+
+background = #661D1F21
+foreground = ${colors.fg}
+
+font-0 = "Inconsolata Nerd Font:style=Medium:size=14;2"
+font-1 = "Inconsolata Nerd Font:style=Bold:size=12;2"
+font-2 = "Inconsolata Nerd Font:size=12;3"
+font-3 = "Inconsolata Nerd Font:size=16;4"
+
+modules-left = bspwm
+modules-center = title
+
+;tray-background = ${colors.polar-night-2}
+tray-background = ${colors.semi-trans}
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
 [settings]
 screenchange-reload = true

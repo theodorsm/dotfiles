@@ -24,7 +24,7 @@
     separator_color = frame
     sort = yes
     idle_threshold = 120
-    font = SF Pro Display 12
+    font = Inconsolata 12
     line_height = 0
     markup = full
     format = "<span><b>%s %p</b></span>\n%b"

@@ -55,6 +55,3 @@ export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/pla
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export ANDROID_STUDIO="$HOME/builds/android-studio"
 export PATH=${PATH}:$ANDROID_STUDIO/bin
-
-# Created by `userpath` on 2020-12-23 14:33:35
-export PATH="$PATH:/home/theodor/.local/bin"

@@ -27,6 +27,7 @@ fi &
 picom -b &
 xidlehook --not-when-fullscreen --not-when-audio --timer 600 'systemctl suspend' '' &
 nm-applet &
+dropbox &
 feh --bg-fill ~/Pictures/deskmat.png &
 
 # fix java stuff

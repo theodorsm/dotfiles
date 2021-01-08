@@ -42,4 +42,6 @@ if xinput --list | grep "Logitech"; then
     xinput set-prop 11 "libinput Natural Scrolling Enabled" 0
 else
     xinput set-prop 11 "libinput Natural Scrolling Enabled" 1
+    xinput set-prop 14 "libinput Natural Scrolling Enabled" 1
+    xinput set-prop 14 "libinput Tapping Enabled" 1
 fi &

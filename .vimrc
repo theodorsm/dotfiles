@@ -28,6 +28,9 @@ let g:pymode_syntax_space_errors = 0
 let g:python_highlight_space_errors=0
 let g:NERDTreeMouseMode=3
 let g:indentLine_fileTypeExclude = ['markdown']
+" indentLine breaks vimwiki
+let g:indentLine_concealcursor=""
+let g:indentLine_conceallevel=2
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'bash']
 let g:airline_powerline_fonts = 0
 let g:ale_fix_on_save = 1
@@ -40,8 +43,16 @@ let g:ale_fixers = {
 \}
 let g:ale_python_flake8_options = '--ignore=E501'
 let g:ale_disable_lsp = 1
+let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
+                 \ 'syntax': 'markdown', 'ext': '.md'}]
+
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+" there are some defaults for image directory and image name, you can change them
+let g:mdip_imgdir = 'img'
+" let g:mdip_imgname = 'image'
+
 filetype indent on
-filetype off                  " required
+filetype plugin on
 
 "keybinds
 nmap <C-n> :CHADopen<CR>
@@ -98,10 +109,11 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'mhartington/oceanic-next'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'vimwiki/vimwiki'
+Plug 'ferrine/md-img-paste.vim'
 call plug#end()            " required
-filetype plugin indent on    " required
 
-let mapleader = " "
+let mapleader = ","
 
 " FZF
 nnoremap <silent> <Leader>b :Buffers<CR>

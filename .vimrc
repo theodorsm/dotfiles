@@ -62,7 +62,7 @@ nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-j> :ALENext<CR>
 nnoremap <C-k> :ALEPrevious<CR>
 autocmd FileType python map <buffer> <F10> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType c map <buffer> <F10> :w<CR>:!gcc % -o %< && ./%< <CR>
+autocmd FileType c map <buffer> <F10> :w<CR>:!gcc -g % -o %< && ./%< <CR>
 autocmd FileType javascript map <buffer> <F10> :w<CR>:!node % <CR>
 autocmd FileType c setlocal ts=4 sw=4
 autocmd FileType cpp setlocal ts=4 sw=4

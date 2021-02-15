@@ -55,5 +55,10 @@ export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/pla
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 export ANDROID_STUDIO="$HOME/builds/android-studio"
 export PATH=${PATH}:$ANDROID_STUDIO/bin
-# pipx
-export PATH="$PATH:/home/theodor/.local/bin"
+export PIPX_BIN_DIR="$HOME/.local/pipx-bin/"
+
+# Created by `userpath` on 2021-02-14 23:16:00
+export PATH="$PATH:/home/theodor/.local/pipx-bin"
+
+# Created by `userpath` on 2021-02-14 23:16:01
+#export PATH="$PATH:/home/theodor/.local/bin"

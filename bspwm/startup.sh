@@ -26,8 +26,6 @@ fi &
 
 picom -b &
 xidlehook --not-when-fullscreen --not-when-audio --timer 600 'systemctl suspend' '' &
-nm-applet &
-dropbox &
 feh --bg-fill ~/Pictures/deskmat.png &
 
 # fix java stuff
@@ -45,3 +43,6 @@ else
     xinput set-prop 14 "libinput Natural Scrolling Enabled" 1
     xinput set-prop 14 "libinput Tapping Enabled" 1
 fi &
+
+nm-applet &
+dropbox &

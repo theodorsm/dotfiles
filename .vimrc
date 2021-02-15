@@ -45,7 +45,8 @@ let g:ale_python_flake8_options = '--ignore=E501'
 let g:ale_disable_lsp = 1
 let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
                  \ 'syntax': 'markdown', 'ext': '.md'}]
-let g:python3_host_prog = "$HOME/.pyenv"
+let g:python3_host_prog = "/bin/python3"
+let g:python_host_prog = "/bin/python2"
 
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 " there are some defaults for image directory and image name, you can change them
@@ -81,6 +82,7 @@ endif
 call plug#begin()
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+Plug 'davidhalter/jedi-vim'
 Plug 'dense-analysis/ale'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf.vim'
@@ -121,7 +123,7 @@ nnoremap <silent> <Leader><TAB> :Buffers<CR>
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <Leader>r :Rg<CR>
 " Git
-nnoremap <silent> <Leader>g :GFiles<CR>
+nnoremap <silent> <Leader>f :GFiles<CR>
 
 "colorscheme
 set t_co=256
@@ -136,9 +138,7 @@ endif
 " floating fzf
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8, 'highlight': 'Comment' } }
 
-" ===================================================
-" NVIM lspconfig settings
-" ===================================================
+" lspconfig settings
 
 " Set mappings for lsp buf methods
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>

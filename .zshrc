@@ -61,4 +61,4 @@ export PIPX_BIN_DIR="$HOME/.local/pipx-bin/"
 export PATH="$PATH:/home/theodor/.local/pipx-bin"
 
 # Created by `userpath` on 2021-02-14 23:16:01
-#export PATH="$PATH:/home/theodor/.local/bin"
+export PATH="$PATH:/home/theodor/.local/bin"

@@ -33,29 +33,18 @@ let g:indentLine_concealcursor=""
 let g:indentLine_conceallevel=2
 let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'bash']
 let g:airline_powerline_fonts = 0
-let g:ale_fix_on_save = 1
-let g:ale_fixers = {
-\ '*': ['remove_trailing_lines', 'trim_whitespace'],
-\ 'javascript': ['eslint', 'prettier'],
-\ 'python': ['black'],
-\ 'markdown': ['prettier'],
-\ 'yaml': ['prettier'],
-\}
-let g:ale_python_flake8_options = '--ignore=E501'
-let g:ale_disable_lsp = 1
 let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
                  \ 'syntax': 'markdown', 'ext': '.md'}]
-let g:python3_host_prog = "/bin/python3"
-let g:python_host_prog = "/bin/python2"
+let g:python3_host_prog = "/usr/bin/python3"
+let g:python_host_prog = "/usr/bin/python2"
 
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
-" there are some defaults for image directory and image name, you can change them
 let g:mdip_imgdir = 'img'
-" let g:mdip_imgname = 'image'
 
 filetype indent on
 filetype plugin on
 
+" ================================================
 "keybinds
 nmap <C-n> :CHADopen<CR>
 vnoremap <C-y> "+y
@@ -72,6 +61,7 @@ autocmd FileType go setlocal ts=4 sw=4
 "autocmd BufWritePost *.py call flake8#Flake8()
 "autocmd BufWritePost *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
+" ================================================
 "plugins
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -81,20 +71,17 @@ endif
 
 call plug#begin()
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-Plug 'davidhalter/jedi-vim'
 Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'nvie/vim-flake8'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'pangloss/vim-javascript'
-Plug 'hdima/python-syntax'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'git://git.wincent.com/command-t.git'
@@ -104,13 +91,9 @@ Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'hzchirs/vim-material'
-Plug 'ayu-theme/ayu-vim'
-Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'arcticicestudio/nord-vim'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'mhartington/oceanic-next'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vimwiki/vimwiki'
 Plug 'ferrine/md-img-paste.vim'
@@ -118,13 +101,17 @@ call plug#end()            " required
 
 let mapleader = ","
 
+" ================================================
 " FZF
 nnoremap <silent> <Leader><TAB> :Buffers<CR>
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <Leader>r :Rg<CR>
+
+" ================================================
 " Git
 nnoremap <silent> <Leader>f :GFiles<CR>
 
+" ================================================
 "colorscheme
 set t_co=256
 set termguicolors
@@ -135,81 +122,84 @@ if !has('nvim')
   set viminfo+=n~/.local/share/vim/viminfo
 endif
 
+" ================================================
 " floating fzf
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8, 'highlight': 'Comment' } }
 
-" lspconfig settings
-
-" Set mappings for lsp buf methods
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gh    <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gc    <cmd>lua vim.lsp.buf.declaration()<CR>
-
-" Set filetype omnifunc
-autocmd Filetype typescript setlocal omnifunc=v:lua.vim.lsp.omnifunc
-autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
-autocmd Filetype javascript setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
-" Use completion-nvim in every buffer
-autocmd BufEnter * lua require'completion'.on_attach()
-
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
+" ================================================
+" ALE
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint', 'prettier'],
+\   'python': ['black', 'isort'],
+\   'markdown': ['prettier'],
+\   'yaml': ['prettier'],
+\}
+let g:ale_linters = {
+      \'python': ['flake8', 'isort', 'jedi'],
+      \'typescript': ['tsserver', 'eslint'],
+      \'typescriptreact': ['tsserver', 'eslint'],
+      \'javascript': ['eslint', 'ternjs', 'flow'],
+      \'jsx': ['stylelint'],
+      \'bash': ['shell', 'shellcheck'],
+      \'zsh': ['shell'],
+\}
+let g:ale_python_flake8_options = '--ignore=E501'
+"let g:ale_disable_lsp = 1
 
 
-lua <<EOF
+" ================================================
+" Coc
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
--- vim
--- yarn global add vim-language-server
-require'lspconfig'.vimls.setup{}
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
--- flow
--- npx flow lsp --help
-require'lspconfig'.flow.setup{
-  on_attach=require'completion'.on_attach
-}
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
--- typescript
--- :LspInstall tsserver
-require'lspconfig'.tsserver.setup{
-  on_attach=require'completion'.on_attach
-}
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
--- bash
--- :LspInstall bashls
-require'lspconfig'.bashls.setup{}
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
--- css
--- :LspInstall cssls
-require'lspconfig'.cssls.setup{}
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
--- Docker
--- :LspInstall dockerls
-require'lspconfig'.dockerls.setup{}
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
--- HTML
--- LspInstall html
-require'lspconfig'.html.setup{}
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
--- python
-require'lspconfig'.jedi_language_server.setup{}
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
--- json
--- :LspInstall jsonls
-require'lspconfig'.jsonls.setup{}
-
--- yamlls
--- :LspInstall yamlls
-require'lspconfig'.yamlls.setup{}
-
-EOF
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)

@@ -24,9 +24,11 @@ elif echo $monitors != "*DP1*" && echo $monitors != "*DP2*"; then
   polybar main -c /home/$USER/.config/polybar/config &
 fi &
 
+feh --bg-fill ~/Pictures/deskmat.png &
+nm-applet &
+dropbox &
 picom -b &
 xidlehook --not-when-fullscreen --not-when-audio --timer 600 'systemctl suspend' '' &
-feh --bg-fill ~/Pictures/deskmat.png &
 
 # fix java stuff
 wmname LG3D &
@@ -43,6 +45,3 @@ else
     xinput set-prop 14 "libinput Natural Scrolling Enabled" 1
     xinput set-prop 14 "libinput Tapping Enabled" 1
 fi &
-
-nm-applet &
-dropbox &

@@ -26,3 +26,8 @@ RUN tlmgr update --self && \
     sectsty
 
 COPY ./eisvogel.tex /root/.pandoc/templates/eisvogel.latex
+# Need systemfonts to use xelatex
+COPY ./computer-modern /usr/share/fonts
+COPY ./dejavu-sans-mono /usr/share/fonts
+
+RUN fc-cache -f -v

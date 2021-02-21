@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sleep 1 &
 # see man zscroll for documentation of the following parameters
 zscroll -l 30 \
         --delay 0.1 \

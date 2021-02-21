@@ -1,28 +1,41 @@
-"      _       _     _______       _     _
-"     | |     | |   |__   __|     | |   | |
-"   __| | ___ | |_     | | ___  __| | __| |_   _
-"  / _` |/ _ \| __|    | |/ _ \/ _` |/ _` | | | |
-" | (_| | (_) | |_     | |  __/ (_| | (_| | |_| |
-"  \__,_|\___/ \__|    |_|\___|\__,_|\__,_|\__, |
-"                                           __/ |
-"                                          |___/
-"
-syntax on
-set number
+
+" ██████╗░░█████╗░████████╗██╗░░░██╗██╗███╗░░░███╗
+" ██╔══██╗██╔══██╗╚══██╔══╝██║░░░██║██║████╗░████║
+" ██║░░██║██║░░██║░░░██║░░░╚██╗░██╔╝██║██╔████╔██║
+" ██║░░██║██║░░██║░░░██║░░░░╚████╔╝░██║██║╚██╔╝██║
+" ██████╔╝╚█████╔╝░░░██║░░░░░╚██╔╝░░██║██║░╚═╝░██║
+" ╚═════╝░░╚════╝░░░░╚═╝░░░░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝
+
+
+
+" ================================================
+"                     SETS
+" ================================================
+
+set guicursor=
+set relativenumber
 set nu
-set tabstop=2
-set shiftwidth=2
+set nohlsearch
+set hidden
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
 set expandtab
-set cursorline
 set autoindent
-set nocompatible
-set encoding=utf-8
+set smartindent
+set cursorline
 set mouse=a
 set timeoutlen=1000 ttimeoutlen=0
 set viminfo+=n~/.vim/viminfo
 set colorcolumn=80
+set incsearch
+set termguicolors
+set scrolloff=8
+set signcolumn=yes
+"set cmdheight=2
+
+
 let g:indentLine_setColors = 2
-let python_highlight_all = 1
 let g:javascript_plugin_jsdoc = 1
 let g:pymode_syntax_space_errors = 0
 let g:python_highlight_space_errors=0
@@ -37,6 +50,8 @@ let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
                  \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:python3_host_prog = "/usr/bin/python3"
 let g:python_host_prog = "/usr/bin/python2"
+let vim_markdown_preview_github=1
+let g:mkdp_refresh_slow=1
 
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 let g:mdip_imgdir = 'img'
@@ -47,22 +62,25 @@ filetype plugin on
 " ================================================
 "keybinds
 nmap <C-n> :CHADopen<CR>
+nnoremap <C-p> :MarkdownPreview<CR>
 vnoremap <C-y> "+y
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-j> :ALENext<CR>
 nnoremap <C-k> :ALEPrevious<CR>
+autocmd BufRead,BufNewFile *.py let python_highlight_all=1
 autocmd FileType python map <buffer> <F10> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType c map <buffer> <F10> :w<CR>:!gcc -g % -o %< && ./%< <CR>
 autocmd FileType javascript map <buffer> <F10> :w<CR>:!node % <CR>
-autocmd FileType c setlocal ts=4 sw=4
-autocmd FileType cpp setlocal ts=4 sw=4
-autocmd FileType go setlocal ts=4 sw=4
+"autocmd FileType c setlocal ts=4 sw=4
+"autocmd FileType cpp setlocal ts=4 sw=4
+"autocmd FileType go setlocal ts=4 sw=4
 "autocmd BufWritePost *.py call flake8#Flake8()
 "autocmd BufWritePost *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 " ================================================
-"plugins
+"                    PLUGINS
+" ================================================
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -70,7 +88,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin()
-Plug 'neovim/nvim-lspconfig'
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Yggdroot/indentLine'
@@ -89,8 +106,6 @@ Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'}
 Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'hzchirs/vim-material'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'arcticicestudio/nord-vim'
@@ -99,10 +114,11 @@ Plug 'vimwiki/vimwiki'
 Plug 'ferrine/md-img-paste.vim'
 call plug#end()            " required
 
-let mapleader = ","
+let mapleader = " "
 
 " ================================================
-" FZF
+"                     FZF
+" ================================================
 nnoremap <silent> <Leader><TAB> :Buffers<CR>
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <Leader>r :Rg<CR>
@@ -127,7 +143,8 @@ endif
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8, 'highlight': 'Comment' } }
 
 " ================================================
-" ALE
+"                     ALE
+" ================================================
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -150,7 +167,8 @@ let g:ale_python_flake8_options = '--ignore=E501'
 
 
 " ================================================
-" Coc
+"                     COC
+" ================================================
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :

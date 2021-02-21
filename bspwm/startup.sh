@@ -2,26 +2,24 @@
 
 setxkbmap eu &
 
-# ====POLYBAR====
-
 # Terminate already running bar instances
 killall polybar &
 
 # Wait until the processes have been shut down
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done &
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
- Second monitor setup
-#~/.config/polybar/launch.sh &
-monitors=$(xrandr --listactivemonitors)
-if echo $monitors | grep "1440" && echo $monitors | grep "DP2"; then
-  polybar secondary -c /home/$USER/.config/polybar/config &
-  polybar side -c /home/$USER/.config/polybar/config &
-elif echo $monitors | grep "1440" && echo $monitors != "*DP2*"; then
-  polybar main -c /home/$USER/.config/polybar/config &
-  polybar secondary -c /home/$USER/.config/polybar/config &
-elif echo $monitors != "*DP1*" && echo $monitors != "*DP2*"; then
-  polybar secondary -c /home/$USER/.config/polybar/config &
-  polybar main -c /home/$USER/.config/polybar/config &
+monitors=$(xrandr)
+if echo $monitors | grep "DP1 connected" && echo $monitors | grep "DP2 connected"; then
+    ~/.screenlayout/home_setup.sh &
+    sleep 2
+    polybar secondary -c /home/$USER/.config/polybar/config &
+    polybar side -c /home/$USER/.config/polybar/config &
+    xrandr --output DP1 --mode 2560x1440 --rate 143.86
+elif echo $monitors | grep "connected 2560x1440"; then
+    polybar main -c /home/$USER/.config/polybar/config &
+    polybar secondary -c /home/$USER/.config/polybar/config &
+else
+    polybar main -c /home/$USER/.config/polybar/config &
 fi &
 
 feh --bg-fill ~/Pictures/deskmat.png &
@@ -37,11 +35,11 @@ wmname LG3D &
 xset r rate 200 40 &
 
 # touchpad
-xinput set-prop 11 "libinput Tapping Enabled" 1 &
+xinput set-prop 11 "libinput Tapping Enabled" 1
 if xinput --list | grep "Logitech"; then
     xinput set-prop 11 "libinput Natural Scrolling Enabled" 0
 else
     xinput set-prop 11 "libinput Natural Scrolling Enabled" 1
     xinput set-prop 14 "libinput Natural Scrolling Enabled" 1
     xinput set-prop 14 "libinput Tapping Enabled" 1
-fi &
+fi

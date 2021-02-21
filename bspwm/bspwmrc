@@ -4,22 +4,17 @@
 sxhkd &
 
 # Second monitor setup
-monitors=$(xrandr --listactivemonitors)
-if echo $monitors | grep "1440" && echo $monitors | grep "DP2"; then
-    xrandr --output DP1 --mode 2560x1440 --rate 143.86
-#    xrandr --output eDP1 --primary --mode 1920x1080 --pos 320x1440 --rotate normal --output DP1 --mode 2560x1440 --pos 0x0 --rotate normal
+monitors=$(xrandr)
+if echo $monitors | grep "DP1 connected" && echo $monitors | grep "DP2 connected"; then
     bspc monitor DP1 -d 1 2 3 4 5
     bspc monitor DP2 -d 6 7 8 9
-elif echo $monitors | grep "1440" && echo $monitors != "*DP2*"; then
+elif echo $monitors | grep "DP1 connected" && echo $monitors != "*DP2*"; then
     bspc monitor DP1 -d 1 2 3 4 5
     bspc monitor eDP1 -d 6 7 8 9
-elif echo $monitors | grep "1440" && echo $monitors != "*DP2*"; then
-    bspc monitor DP1 -d 1 2 3 4 5
-    bspc monitor eDP1 -d 6 7 8 9
-elif echo $monitors | grep "Monitors: 2"; then
+elif echo $monitors | grep "DP2 connected"; then
     bspc monitor DP2 -d 1 2 3 4 5
     bspc monitor eDP1 -d 6 7 8 9
-elif echo $monitors != "*DP1*" && echo $monitors != "*DP2*"; then
+else
     bspc monitor eDP1 -d 1 2 3 4 5
 fi
 

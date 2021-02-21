@@ -61,7 +61,7 @@ bottom = false
 fixed-center = true
 wm-restack = bspwm
 monitor = DP1
-monitor-fallback = DP2
+;monitor-fallback = DP2
 
 background = #661D1F21
 foreground = ${colors.fg}

@@ -1,4 +1,4 @@
-## My Unix Setup
+## My Setup
 
 ![screenshot](screenshot.png)
 ![startpage](startpage.png)

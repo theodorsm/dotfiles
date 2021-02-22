@@ -11,7 +11,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 monitors=$(xrandr)
 if echo $monitors | grep "DP1 connected" && echo $monitors | grep "DP2 connected"; then
     ~/.screenlayout/home_setup.sh &
-    sleep 2
+    sleep 2 &
     polybar secondary -c /home/$USER/.config/polybar/config &
     polybar side -c /home/$USER/.config/polybar/config &
     xrandr --output DP1 --mode 2560x1440 --rate 143.86

@@ -50,7 +50,6 @@ let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
                  \ 'syntax': 'markdown', 'ext': '.md'}]
 let g:python3_host_prog = "/usr/bin/python3"
 let g:python_host_prog = "/usr/bin/python2"
-let vim_markdown_preview_github=1
 let g:mkdp_refresh_slow=1
 
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
@@ -112,6 +111,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vimwiki/vimwiki'
 Plug 'ferrine/md-img-paste.vim'
+Plug 'mhinz/vim-startify'
 call plug#end()            " required
 
 let mapleader = " "
@@ -221,3 +221,16 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+
+" ================================================
+"                Custom bindings
+" ================================================
+
+" Render markdown with python
+function! MarkdownView()
+    execute 'silent !' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --highlight-style=breezeDark --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
+endfunction
+nnoremap <leader>v :call MarkdownView()<cr>
+
+" Prompt for spell language
+nnoremap <expr> <F1> ":setlocal spell spelllang=" . input("Spell language: ")"

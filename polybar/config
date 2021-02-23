@@ -43,11 +43,11 @@ font-1 = "Inconsolata Nerd Font:style=Bold:size=12;2"
 font-2 = "Inconsolata Nerd Font:size=12;3"
 font-3 = "Inconsolata Nerd Font:size=12;4"
 
-modules-left = session bspwm
+modules-left = session bspwm date
 modules-center = title
-modules-right = cpu memory pulseaudio wlan battery date
+modules-right = cpu memory pulseaudio wlan battery
 
-tray-background = ${colors.semi-trans}
+tray-background = ${colors.nord-blue}
 tray-position = right
 tray-maxsize = 16
 

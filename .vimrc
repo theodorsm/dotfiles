@@ -221,6 +221,25 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+" ================================================
+"                   Startify
+" ================================================
+let g:startify_bookmarks = ['~/dotfiles/.vimrc', '~/dotfiles/.zshrc','~/dotfiles/', '~/prog/webkom/', '~/prog/webkom/lego/',
+            \ '~/prog/webkom/lego-webapp/', '~/ctf/' ]
+let g:ascii = [
+      \ "        __",
+      \ "\ ______/ V`-,       Wooof",
+      \ " }        /~~",
+      \ "/_)^ --,r'",
+      \ "b      |b      Wise doggo says:",
+     \]
+let g:startify_custom_header = g:ascii + startify#fortune#boxed()
+let g:startify_lists = [
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'files',     'header': ['   MRU']            },
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
 
 " ================================================
 "                Custom bindings
@@ -228,9 +247,13 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Render markdown with python
 function! MarkdownView()
-    execute 'silent !' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --highlight-style=breezeDark --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
+    execute ':cd %:p:h'
+    execute '!' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --highlight-style=breezeDark --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
 endfunction
 nnoremap <leader>v :call MarkdownView()<cr>
 
 " Prompt for spell language
 nnoremap <expr> <F1> ":setlocal spell spelllang=" . input("Spell language: ")"
+
+" Change directory to current file
+nnoremap <leader>cd :cd %:p:h<CR>

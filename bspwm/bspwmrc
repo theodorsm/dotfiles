@@ -5,10 +5,11 @@ sxhkd &
 
 # Second monitor setup
 monitors=$(xrandr)
+monitors_list=$(xrandr --listmonitors)
 if echo $monitors | grep "DP1 connected" && echo $monitors | grep "DP2 connected"; then
     bspc monitor DP1 -d 1 2 3 4 5
     bspc monitor DP2 -d 6 7 8 9
-elif echo $monitors | grep "DP1 connected" && echo $monitors != "*DP2*"; then
+elif echo $monitors | grep "DP1 connected" && echo $monitors_list | grep "Monitors: 2"; then
     bspc monitor DP1 -d 1 2 3 4 5
     bspc monitor eDP1 -d 6 7 8 9
 elif echo $monitors | grep "DP2 connected"; then

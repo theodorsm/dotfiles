@@ -34,8 +34,8 @@ XF86Audio{Mute,LowerVolume,RaiseVolume}
 Print
     import ~/Pictures/screenshots/screenshot-`date +%H%M%S`.jpg
 # file manager
-super + d
-  dolphin
+super + t
+  thunar
 # bspwm hotkeys
 #
 

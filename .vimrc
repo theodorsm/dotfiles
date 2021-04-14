@@ -16,7 +16,6 @@ set guicursor=
 set relativenumber
 set nu
 set nohlsearch
-set hidden
 set noerrorbells
 set tabstop=4 softtabstop=4
 set shiftwidth=4
@@ -48,6 +47,7 @@ let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=j
 let g:airline_powerline_fonts = 0
 let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
                  \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext = 0
 let g:python3_host_prog = "/usr/bin/python3"
 let g:python_host_prog = "/usr/bin/python2"
 let g:mkdp_refresh_slow=1
@@ -71,6 +71,7 @@ autocmd BufRead,BufNewFile *.py let python_highlight_all=1
 autocmd FileType python map <buffer> <F10> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType c map <buffer> <F10> :w<CR>:!gcc -g % -o %< && ./%< <CR>
 autocmd FileType javascript map <buffer> <F10> :w<CR>:!node % <CR>
+autocmd FileType javascript  setlocal shiftwidth=2 softtabstop=2
 "autocmd FileType c setlocal ts=4 sw=4
 "autocmd FileType cpp setlocal ts=4 sw=4
 "autocmd FileType go setlocal ts=4 sw=4
@@ -112,6 +113,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vimwiki/vimwiki'
 Plug 'ferrine/md-img-paste.vim'
 Plug 'mhinz/vim-startify'
+
 call plug#end()            " required
 
 let mapleader = " "
@@ -147,22 +149,26 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8, 'highlight': 'Comm
 " ================================================
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint', 'prettier'],
-\   'python': ['black', 'isort'],
-\   'markdown': ['prettier'],
-\   'yaml': ['prettier'],
+    \'*': ['remove_trailing_lines', 'trim_whitespace'],
+    \'javascript': ['eslint', 'prettier'],
+    \'python': ['black', 'isort'],
+    \'typescript': ['prettier', 'eslint'],
+    \'typescriptreact': ['prettier', 'eslint'],
+    \'yaml': ['prettier'],
+    \'java': ['google_java_format', 'remove_trailing_lines', 'trim_whitespace'],
 \}
 let g:ale_linters = {
-      \'python': ['flake8', 'isort', 'jedi'],
-      \'typescript': ['tsserver', 'eslint'],
-      \'typescriptreact': ['tsserver', 'eslint'],
-      \'javascript': ['eslint', 'ternjs', 'flow'],
-      \'jsx': ['stylelint'],
-      \'bash': ['shell', 'shellcheck'],
-      \'zsh': ['shell'],
+    \'python': ['flake8', 'isort', 'jedi'],
+    \'typescript': ['tsserver', 'eslint'],
+    \'typescriptreact': ['tsserver', 'eslint'],
+    \'javascript': ['eslint', 'ternjs', 'flow'],
+    \'jsx': ['stylelint'],
+    \'bash': ['shell', 'shellcheck'],
+    \'zsh': ['shell'],
+    \'java': [],
 \}
 let g:ale_python_flake8_options = '--ignore=E501'
+let g:ale_java_google_java_format_options= '--aosp'
 "let g:ale_disable_lsp = 1
 
 
@@ -221,11 +227,16 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+
+" Overrides vimwiki
+autocmd FileType markdown let b:coc_suggest_disable = 1
+
+
 " ================================================
 "                   Startify
 " ================================================
 let g:startify_bookmarks = ['~/dotfiles/.vimrc', '~/dotfiles/.zshrc','~/dotfiles/', '~/prog/webkom/', '~/prog/webkom/lego/',
-            \ '~/prog/webkom/lego-webapp/', '~/ctf/' ]
+            \ '~/prog/webkom/lego-webapp/', '~/prog/itdagene/',  '~/ctf/' ]
 let g:ascii = [
       \ "        __",
       \ "\ ______/ V`-,       Wooof",
@@ -248,12 +259,15 @@ let g:startify_lists = [
 " Render markdown with python
 function! MarkdownView()
     execute ':cd %:p:h'
-    execute '!' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --highlight-style=breezeDark --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
+    execute '!' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --listings --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
 endfunction
 nnoremap <leader>v :call MarkdownView()<cr>
 
 " Prompt for spell language
 nnoremap <expr> <F1> ":setlocal spell spelllang=" . input("Spell language: ")"
+"
+nnoremap <F2> :setlocal spell spelllang=en_us<cr>
+nnoremap <F3> :setlocal spell spelllang=nb<cr>
 
 " Change directory to current file
 nnoremap <leader>cd :cd %:p:h<CR>

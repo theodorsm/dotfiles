@@ -23,6 +23,7 @@ RUN tlmgr update --self && \
     zref \
     fontawesome5 \
     footmisc \
+    etoolbox \
     sectsty
 
 COPY ./eisvogel.tex /root/.pandoc/templates/eisvogel.latex

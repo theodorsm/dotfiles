@@ -18,6 +18,14 @@ if echo $monitors | grep "DP1 connected" && echo $monitors | grep "DP2 connected
 elif echo $monitors | grep "connected 2560x1440"; then
     polybar main -c /home/$USER/.config/polybar/config &
     polybar secondary -c /home/$USER/.config/polybar/config &
+elif echo $monitors | grep "DP1 connected 1920x1200"; then
+    polybar main -c /home/$USER/.config/polybar/config &
+    polybar secondary -c /home/$USER/.config/polybar/config &
+elif echo $monitors | grep "DP1 connected 1920x1080"; then
+    ~/.screenlayout/1080p_top.sh &
+    sleep 2 &
+    polybar main -c /home/$USER/.config/polybar/config &
+    polybar secondary -c /home/$USER/.config/polybar/config &
 else
     polybar main -c /home/$USER/.config/polybar/config &
 fi &

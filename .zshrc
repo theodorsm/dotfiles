@@ -36,6 +36,7 @@ alias gc="git commit"
 alias gs="git status"
 alias gd="git diff"
 alias gl="git log"
+alias gld="git log --oneline --graph --decorate"
 
 #ctf-alias
 alias stego-docker="$HOME/dotfiles/scripts/stego-docker.sh"

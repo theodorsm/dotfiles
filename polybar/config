@@ -1,6 +1,7 @@
 include-file = /home/$USER/.config/polybar/colors
 
 include-file = /home/$USER/.config/polybar/modules/battery
+include-file = /home/$USER/.config/polybar/modules/battery-status
 include-file = /home/$USER/.config/polybar/modules/bspwm
 include-file = /home/$USER/.config/polybar/modules/sep
 include-file = /home/$USER/.config/polybar/modules/cpu
@@ -32,7 +33,7 @@ height = 30
 top = true
 monitor = eDP1
 
-fixed-center = true
+fixed-center = false
 wm-restack = bspwm
 
 background = #001D1F21
@@ -45,7 +46,7 @@ font-3 = "Inconsolata Nerd Font:size=12;4"
 
 modules-left = session bspwm date
 modules-center = title
-modules-right = cpu memory pulseaudio wlan battery
+modules-right = cpu memory pulseaudio battery-status
 
 tray-background = ${colors.nord-blue}
 tray-position = right
@@ -58,7 +59,7 @@ cursor-scroll = ns-resize
 width = 100%
 height = 30
 bottom = false
-fixed-center = true
+fixed-center = false
 wm-restack = bspwm
 monitor = DP1
 ;monitor-fallback = DP2
@@ -73,12 +74,12 @@ font-3 = "Inconsolata Nerd Font:size=16;4"
 
 modules-left = session bspwm date
 modules-center = title
-modules-right = spotify spotify-prev spotify-play-pause spotify-next sep cpu memory pulseaudio battery
+modules-right = spotify spotify-prev spotify-play-pause spotify-next sep cpu memory pulseaudio battery-status
 
 ;tray-background = ${colors.polar-night-2}
 tray-background = ${colors.nord-blue}
 tray-position = right
-tray-maxsize = 16
+tray-maxsize = 30
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -90,7 +91,7 @@ enable-ipc = true
 width = 100%
 height = 30
 bottom = false
-fixed-center = true
+fixed-center = false
 wm-restack = bspwm
 monitor = DP2
 

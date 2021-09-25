@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/theodor/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf) source $ZSH/oh-my-zsh.sh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
@@ -36,6 +36,7 @@ alias gc="git commit"
 alias gs="git status"
 alias gd="git diff"
 alias gl="git log"
+alias gld="git log --oneline --graph --decorate"
 
 #ctf-alias
 alias stego-docker="$HOME/dotfiles/scripts/stego-docker.sh"
@@ -57,7 +58,7 @@ export LANG=en_US.UTF-8
 # android-dev stuff
 export ANDROID_HOME="$HOME/Android/Sdk"
 export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+export JAVA_HOME=/usr/lib/jvm/java-15-openjdk
 export ANDROID_STUDIO="$HOME/builds/android-studio"
 export PATH=${PATH}:$ANDROID_STUDIO/bin
 export PIPX_BIN_DIR="$HOME/.local/pipx-bin/"

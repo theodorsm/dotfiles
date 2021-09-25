@@ -6,7 +6,9 @@ configuration {
   disable-history:    false;
   modi:               "drun";
   display-drun:       "apps";
-  font: "Open Sans 14";
+  font: "Hack 12";
   columns: 2;
 }
 @import "/home/theodor/.local/share/rofi/themes/onedark.rasi"
+//@theme "/home/theodor/.local/share/rofi/themes/onedark.rasi"
+@theme "/home/theodor/.local/share/rofi/themes/onedark.rasi"

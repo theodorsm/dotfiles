@@ -10,11 +10,11 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 monitors=$(xrandr)
 if echo $monitors | grep "DP1 connected" && echo $monitors | grep "DP2 connected"; then
+    sleep 2 &
     ~/.screenlayout/home_setup.sh &
     sleep 2 &
     polybar secondary -c /home/$USER/.config/polybar/config &
     polybar side -c /home/$USER/.config/polybar/config &
-    xrandr --output DP1 --mode 2560x1440 --rate 143.86
 elif echo $monitors | grep "connected 2560x1440"; then
     polybar main -c /home/$USER/.config/polybar/config &
     polybar secondary -c /home/$USER/.config/polybar/config &
@@ -31,10 +31,10 @@ else
 fi &
 
 feh --bg-fill ~/Pictures/deskmat.png &
-nm-applet &
-dropbox &
 picom -b &
 xidlehook --not-when-fullscreen --not-when-audio --timer 600 'systemctl suspend' '' &
+nm-applet &
+dropbox &
 
 # fix java stuff
 wmname LG3D &

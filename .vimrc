@@ -34,16 +34,19 @@ set signcolumn=yes
 "set cmdheight=2
 
 
-let g:indentLine_setColors = 2
+"let g:indentLine_setColors = 2
 let g:javascript_plugin_jsdoc = 1
 let g:pymode_syntax_space_errors = 0
 let g:python_highlight_space_errors=0
 let g:NERDTreeMouseMode=3
 let g:indentLine_fileTypeExclude = ['markdown']
 " indentLine breaks vimwiki
-let g:indentLine_concealcursor=""
-let g:indentLine_conceallevel=2
-let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'bash']
+"let g:indentLine_concealcursor=""
+"let g:indentLine_conceallevel=2
+let g:markdown_enable_conceal = 1
+let g:markdown_enable_folding = 1
+let g:vim_markdown_conceal_code_blocks = 0
+let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'bash', 'python', 'vim', 'shell']
 let g:airline_powerline_fonts = 0
 let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
                  \ 'syntax': 'markdown', 'ext': '.md'}]
@@ -103,16 +106,21 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'git://git.wincent.com/command-t.git'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'}
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'}
+" Plug 'tpope/vim-markdown'
 Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'arcticicestudio/nord-vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 Plug 'ferrine/md-img-paste.vim'
 Plug 'mhinz/vim-startify'
+Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
+Plug 'sotte/presenting.vim'
+Plug 'junegunn/goyo.vim'
+
 
 call plug#end()            " required
 
@@ -140,6 +148,8 @@ if !has('nvim')
   set viminfo+=n~/.local/share/vim/viminfo
 endif
 
+let g:jedi#auto_vim_configuration = 0
+
 " ================================================
 " floating fzf
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8, 'highlight': 'Comment' } }
@@ -165,6 +175,7 @@ let g:ale_linters = {
     \'jsx': ['stylelint'],
     \'bash': ['shell', 'shellcheck'],
     \'zsh': ['shell'],
+    \'yaml': ['yamllint'],
     \'java': [],
 \}
 let g:ale_python_flake8_options = '--ignore=E501'
@@ -259,7 +270,8 @@ let g:startify_lists = [
 " Render markdown with python
 function! MarkdownView()
     execute ':cd %:p:h'
-    execute '!' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --listings --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
+"    execute '!' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --listings --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
+    execute '!' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
 endfunction
 nnoremap <leader>v :call MarkdownView()<cr>
 
@@ -271,3 +283,7 @@ nnoremap <F3> :setlocal spell spelllang=nb<cr>
 
 " Change directory to current file
 nnoremap <leader>cd :cd %:p:h<CR>
+
+let hostname=system('hostname -s | tr -d "\n"')
+let user=system('echo $USER | tr -d "\n"')
+let g:airline_section_a = '%{user}@%{hostname}'

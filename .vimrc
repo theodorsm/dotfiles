@@ -91,7 +91,6 @@ endif
 
 call plug#begin()
 Plug 'dense-analysis/ale'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
@@ -116,12 +115,14 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'vimwiki/vimwiki'
 Plug 'ferrine/md-img-paste.vim'
 Plug 'mhinz/vim-startify'
-"Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
 Plug 'sotte/presenting.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer', {'branch': 'master'}
-Plug 'nvim-lua/completion-nvim'
+" Plug 'williamboman/nvim-lsp-installer', {'branch': 'master'}
+Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}
+Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
+Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
+Plug 'jiangmiao/auto-pairs'
 
 
 call plug#end()            " required
@@ -169,17 +170,17 @@ let g:ale_fixers = {
     \'yaml': ['prettier'],
     \'java': ['google_java_format', 'remove_trailing_lines', 'trim_whitespace'],
 \}
-"let g:ale_linters = {
-"    \'python': ['flake8', 'isort', 'jedi'],
-"    \'typescript': ['tsserver', 'eslint'],
-"    \'typescriptreact': ['tsserver', 'eslint'],
-"    \'javascript': ['eslint', 'ternjs', 'flow'],
-"    \'jsx': ['stylelint'],
-"    \'bash': ['shell', 'shellcheck'],
-"    \'zsh': ['shell'],
-"    \'yaml': ['yamllint'],
-"    \'java': [],
-"\}
+let g:ale_linters = {
+    \'python': ['flake8', 'isort', 'jedi'],
+    \'typescript': ['tsserver', 'eslint'],
+    \'typescriptreact': ['tsserver', 'eslint'],
+    \'javascript': ['eslint', 'ternjs', 'flow'],
+    \'jsx': ['stylelint'],
+    \'bash': ['shell', 'shellcheck'],
+    \'zsh': ['shell'],
+    \'yaml': ['yamllint'],
+    \'java': [],
+\}
 let g:ale_python_flake8_options = '--ignore=E501'
 let g:ale_java_google_java_format_options= '--aosp'
 let g:ale_disable_lsp = 1
@@ -261,79 +262,18 @@ autocmd BufRead,BufNewFile tsconfig.base.json set filetype=jsonc
 
 " set makeprg=
 
-"
-" LSP
-"
+luafile ~/.vim/lsp_config.lua
 
-set omnifunc=syntaxcomplete#Complete
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> ge    <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>f    <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <leader>rn    <cmd>lua vim.lsp.buf.rename()<CR>
 
-lua << EOF
-local nvim_lsp = require('lspconfig')
+nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
+xmap <silent> <leader>a <cmd>lua vim.lsp.buf.range_code_action()<CR>
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
-end
-
-local lsp_installer = require("nvim-lsp-installer")
-
-lsp_installer.on_server_ready(function(server)
-    local opts = {}
-
-    -- (optional) Customize the options passed to the server
-    if server.name == "tsserver" then
-        filetypes = {"typescript", "typescript.tsx", "typescriptreact"}
-    end
-
-    -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
-    server:setup(opts)
-    vim.cmd [[ do User LspAttachBuffers ]]
-end)
-
-nvim_lsp.jedi_language_server.setup{on_attach=require'completion'.on_attach}
-nvim_lsp.tsserver.setup{on_attach=require'completion'.on_attach, filetypes = {"typescript", "typescript.tsx", "typescriptreact"}}
-nvim_lsp.flow.setup{on_attach=require'completion'.on_attach}
-nvim_lsp.vimls.setup{on_attach=require'completion'.on_attach}
-nvim_lsp.bashls.setup{on_attach=require'completion'.on_attach}
-EOF
-
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
-"map <c-p> to manually trigger completion
-imap <silent> <c-Space> <Plug>(completion_trigger)
+set completeopt=menuone,noselect

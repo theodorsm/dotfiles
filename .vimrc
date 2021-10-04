@@ -14,9 +14,7 @@
 
 set guicursor=
 set relativenumber
-set nu
-set nohlsearch
-set noerrorbells
+set nu nohlsearch
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
@@ -75,6 +73,7 @@ autocmd FileType python map <buffer> <F10> :w<CR>:exec '!python3' shellescape(@%
 autocmd FileType c map <buffer> <F10> :w<CR>:!gcc -g % -o %< && ./%< <CR>
 autocmd FileType javascript map <buffer> <F10> :w<CR>:!node % <CR>
 autocmd FileType javascript  setlocal shiftwidth=2 softtabstop=2
+autocmd FileType simula setlocal shiftwidth=4 softtabstop=4
 "autocmd FileType c setlocal ts=4 sw=4
 "autocmd FileType cpp setlocal ts=4 sw=4
 "autocmd FileType go setlocal ts=4 sw=4
@@ -92,7 +91,7 @@ endif
 
 call plug#begin()
 Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
@@ -106,7 +105,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'git://git.wincent.com/command-t.git'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'}
 " Plug 'tpope/vim-markdown'
 Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
@@ -117,9 +116,12 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'vimwiki/vimwiki'
 Plug 'ferrine/md-img-paste.vim'
 Plug 'mhinz/vim-startify'
-Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
+"Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
 Plug 'sotte/presenting.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer', {'branch': 'master'}
+Plug 'nvim-lua/completion-nvim'
 
 
 call plug#end()            " required
@@ -148,7 +150,7 @@ if !has('nvim')
   set viminfo+=n~/.local/share/vim/viminfo
 endif
 
-let g:jedi#auto_vim_configuration = 0
+"let g:jedi#auto_vim_configuration = 0
 
 " ================================================
 " floating fzf
@@ -167,81 +169,20 @@ let g:ale_fixers = {
     \'yaml': ['prettier'],
     \'java': ['google_java_format', 'remove_trailing_lines', 'trim_whitespace'],
 \}
-let g:ale_linters = {
-    \'python': ['flake8', 'isort', 'jedi'],
-    \'typescript': ['tsserver', 'eslint'],
-    \'typescriptreact': ['tsserver', 'eslint'],
-    \'javascript': ['eslint', 'ternjs', 'flow'],
-    \'jsx': ['stylelint'],
-    \'bash': ['shell', 'shellcheck'],
-    \'zsh': ['shell'],
-    \'yaml': ['yamllint'],
-    \'java': [],
-\}
+"let g:ale_linters = {
+"    \'python': ['flake8', 'isort', 'jedi'],
+"    \'typescript': ['tsserver', 'eslint'],
+"    \'typescriptreact': ['tsserver', 'eslint'],
+"    \'javascript': ['eslint', 'ternjs', 'flow'],
+"    \'jsx': ['stylelint'],
+"    \'bash': ['shell', 'shellcheck'],
+"    \'zsh': ['shell'],
+"    \'yaml': ['yamllint'],
+"    \'java': [],
+"\}
 let g:ale_python_flake8_options = '--ignore=E501'
 let g:ale_java_google_java_format_options= '--aosp'
-"let g:ale_disable_lsp = 1
-
-
-" ================================================
-"                     COC
-" ================================================
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Overrides vimwiki
-autocmd FileType markdown let b:coc_suggest_disable = 1
-
+let g:ale_disable_lsp = 1
 
 " ================================================
 "                   Startify
@@ -319,3 +260,80 @@ let g:airline_section_a = '%{user}@%{hostname}'
 autocmd BufRead,BufNewFile tsconfig.base.json set filetype=jsonc
 
 " set makeprg=
+
+"
+" LSP
+"
+
+set omnifunc=syntaxcomplete#Complete
+
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+end
+
+local lsp_installer = require("nvim-lsp-installer")
+
+lsp_installer.on_server_ready(function(server)
+    local opts = {}
+
+    -- (optional) Customize the options passed to the server
+    if server.name == "tsserver" then
+        filetypes = {"typescript", "typescript.tsx", "typescriptreact"}
+    end
+
+    -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
+    server:setup(opts)
+    vim.cmd [[ do User LspAttachBuffers ]]
+end)
+
+nvim_lsp.jedi_language_server.setup{on_attach=require'completion'.on_attach}
+nvim_lsp.tsserver.setup{on_attach=require'completion'.on_attach, filetypes = {"typescript", "typescript.tsx", "typescriptreact"}}
+nvim_lsp.flow.setup{on_attach=require'completion'.on_attach}
+nvim_lsp.vimls.setup{on_attach=require'completion'.on_attach}
+nvim_lsp.bashls.setup{on_attach=require'completion'.on_attach}
+EOF
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
+"map <c-p> to manually trigger completion
+imap <silent> <c-Space> <Plug>(completion_trigger)

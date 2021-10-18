@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
 # Getting the data and initializing an array.
-BATTERY_INFO=($( acpi | awk -F',' '{ print $0 }'))
+BATTERY_INFO=($( acpi | awk -F',' '{ print $2 }'))
 
 # Formatting helpers
-CHARGE=$((${BATTERY_INFO[3]//%,}))
+CHARGE=${BATTERY_INFO::-1}
 ICON=""
 FORMAT=""
 

@@ -277,3 +277,4 @@ nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
 xmap <silent> <leader>a <cmd>lua vim.lsp.buf.range_code_action()<CR>
 
 set completeopt=menuone,noselect
+autocmd FileType markdown lua require('cmp').setup.buffer { enabled = false }

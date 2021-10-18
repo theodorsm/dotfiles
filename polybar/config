@@ -62,7 +62,7 @@ bottom = false
 fixed-center = false
 wm-restack = bspwm
 monitor = DP1
-;monitor-fallback = DP2
+monitor-fallback = DP1-8
 
 background = #661D1F21
 foreground = ${colors.fg}
@@ -74,7 +74,7 @@ font-3 = "Inconsolata Nerd Font:size=16;4"
 
 modules-left = session bspwm date
 modules-center = title
-modules-right = spotify spotify-prev spotify-play-pause spotify-next sep cpu memory pulseaudio
+modules-right = spotify spotify-prev spotify-play-pause spotify-next sep cpu memory pulseaudio battery-status
 
 ;tray-background = ${colors.polar-night-2}
 tray-background = ${colors.nord-blue}

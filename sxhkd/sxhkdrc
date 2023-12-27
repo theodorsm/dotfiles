@@ -35,7 +35,7 @@ Print
     import ~/Pictures/screenshots/screenshot-`date +%H%M%S`.jpg
 # file manager
 super + d
-  thunar
+  dolphin
 # bspwm hotkeys
 #
 

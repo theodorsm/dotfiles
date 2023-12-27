@@ -32,16 +32,25 @@ reverse-scroll = false
 
 ; ws-icon-[0-9]+ = label;icon
 ; Note that the label needs to correspond with the bspwm workspace name
-ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5;vm
-ws-icon-5 = 6;
-ws-icon-6 = 7;
-ws-icon-7 = 8;
-ws-icon-8 = 9;
-ws-icon-9 = 10;DIV
+; ws-icon-0 = 1;
+; ws-icon-1 = 2;
+; ws-icon-2 = 3;
+; ws-icon-3 = 4;
+; ws-icon-4 = 5;vm
+; ws-icon-5 = 6;
+; ws-icon-6 = 7;
+; ws-icon-7 = 8;
+; ws-icon-8 = 9;
+; ws-icon-9 = 10;DIV
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
 
 ws-icon-default = DIV
 format-padding = 2
@@ -125,5 +134,5 @@ label-empty-foreground = #55
 
 ; Separator in between workspaces
 label-separator = |
-label-separator-padding = 1
+label-separator-padding = 0
 label-separator-foreground = ${colors.trans}

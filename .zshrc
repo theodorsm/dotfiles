@@ -16,7 +16,8 @@ ZSH_HIGHLIGHT_STYLES[arg0]=fg=white
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 KEYTIMEOUT=1
-
+# edgeDB
+fpath+=~/.zfunc
 # aliases
 alias vim="nvim"
 alias ll="exa --long"
@@ -37,6 +38,7 @@ alias gs="git status"
 alias gd="git diff"
 alias gl="git log"
 alias gld="git log --oneline --graph --decorate"
+alias code="vscodium"
 
 #ctf-alias
 alias stego-docker="$HOME/dotfiles/scripts/stego-docker.sh"
@@ -50,7 +52,8 @@ export PROMPT_EOL_MARK=""
 
 # exports
 export EDITOR=nvim
-export PASSWORD_STORE_DIR="/home/theodor/prog/webkom/password-store"
+# export PASSWORD_STORE_DIR="/home/theodor/prog/webkom/password-store"
+export PASSWORD_STORE_DIR="/home/theodor/.password-store"
 export BSPWM_DIR="/home/theodor/.config/bspwm"
 export TERM=xterm-256color
 export LC_ALL=en_US.UTF-8
@@ -58,10 +61,14 @@ export LANG=en_US.UTF-8
 # android-dev stuff
 export ANDROID_HOME="$HOME/Android/Sdk"
 export PATH=${PATH}:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-export JAVA_HOME=/usr/lib/jvm/java-15-openjdk
+#export JAVA_HOME=/usr/lib/jvm/java-15-openjdk
+#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk/
+export PATH=$PATH:$JAVA_HOME
 export ANDROID_STUDIO="$HOME/builds/android-studio"
 export PATH=${PATH}:$ANDROID_STUDIO/bin
 export PIPX_BIN_DIR="$HOME/.local/pipx-bin/"
+export PYTHONPATH="/usr/lib"
 
 # Created by `userpath` on 2021-02-14 23:16:00
 export PATH="$PATH:/home/theodor/.local/pipx-bin"
@@ -69,8 +76,29 @@ export PATH="$PATH:/home/theodor/.local/pipx-bin"
 # Created by `userpath` on 2021-02-14 23:16:01
 export PATH="$PATH:/home/theodor/.local/bin"
 
+export PATH="$PATH:/opt/riscv/bin"
 
-function pandoc {
-  echo pandoc $@
-  docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel "$@"
-}
+export PATH="$PATH:/home/theodor/.local/node/bin"
+
+
+# function pandoc {
+#   echo pandoc $@
+#   docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel "$@"
+# }
+
+export PNPM_HOME="/home/theodor/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+export ANSIBLE_NOCOWS=1
+
+# go stuff
+export GOPATH=$HOME/go
+export GOROOT=/usr/lib/go
+export PATH=$PATH:$GOPATH
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/theodor/builds/google-cloud-sdk/path.zsh.inc' ]; then . '/home/theodor/builds/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/theodor/builds/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/theodor/builds/google-cloud-sdk/completion.zsh.inc'; fi

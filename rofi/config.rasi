@@ -11,4 +11,5 @@ configuration {
 }
 @import "/home/theodor/.local/share/rofi/themes/onedark.rasi"
 //@theme "/home/theodor/.local/share/rofi/themes/onedark.rasi"
-@theme "/home/theodor/.local/share/rofi/themes/onedark.rasi"
+//@theme "/home/theodor/.local/share/rofi/themes/onedark.rasi"
+@theme "/home/theodor/.local/share/rofi/themes/Paper.rasi"

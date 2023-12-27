@@ -6,17 +6,20 @@ sxhkd &
 # Second monitor setup
 monitors=$(xrandr)
 monitors_list=$(xrandr --listmonitors)
-if echo $monitors | grep "DP1 connected" && echo $monitors | grep "DP2 connected"; then
-    bspc monitor DP1 -d 1 2 3 4 5
-    bspc monitor DP2 -d 6 7 8 9
-elif echo $monitors | grep "DP1 connected" && echo $monitors_list | grep "Monitors: 2"; then
-    bspc monitor DP1 -d 1 2 3 4 5
-    bspc monitor eDP1 -d 6 7 8 9
-elif echo $monitors | grep "DP2 connected"; then
-    bspc monitor DP2 -d 1 2 3 4 5
-    bspc monitor eDP1 -d 6 7 8 9
+if echo $monitors | grep "DP-1 connected" && echo $monitors | grep "DP-2 connected"; then
+    bspc monitor DP-1 -d 1 2 3 4 5
+    bspc monitor DP-2 -d 6 7 8 9
+elif echo $monitors | grep "DP-1 connected" && echo $monitors_list | grep "Monitors: 2"; then
+    bspc monitor DP-1 -d 1 2 3 4 5
+    bspc monitor eDP-1 -d 6 7 8 9
+elif echo $monitors | grep "DP-2 connected"; then
+    bspc monitor DP-2 -d 1 2 3 4 5
+    bspc monitor eDP-1 -d 6 7 8 9
+elif echo $monitors | grep "DP-2-8 connected"; then
+    bspc monitor DP-2-8 -d 1 2 3 4 5
+    bspc monitor eDP-1 -d 6 7 8 9
 else
-    bspc monitor eDP1 -d 1 2 3 4 5
+    bspc monitor eDP-1 -d 1 2 3 4 5
 fi
 
 bspc config border_width         2
@@ -31,12 +34,13 @@ bspc rule -a Gimp desktop='^4' state=floating follow=on
 bspc rule -a slack desktop='^2'
 bspc rule -a code-oss desktop='^3'
 bspc rule -a mplayer2 state=floating
-bspc rule -a Spotify desktop='^5'
+# bspc rule -a Spotify desktop='^5'
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Pavucontrol state=floating
 bspc rule -a dolphin state=floating
 bspc rule -a feh state=floating
 bspc rule -a app.App state=floating
+bspc rule -a Zathura state=tiled
 
 /home/$USER/dotfiles/bspwm/startup.sh &

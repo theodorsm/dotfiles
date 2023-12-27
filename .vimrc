@@ -1,11 +1,9 @@
 
 " ██████╗░░█████╗░████████╗██╗░░░██╗██╗███╗░░░███╗
-" ██╔══██╗██╔══██╗╚══██╔══╝██║░░░██║██║████╗░████║
-" ██║░░██║██║░░██║░░░██║░░░╚██╗░██╔╝██║██╔████╔██║
+" ██╔══██╗██╔══██╗╚══██╔══╝██║░░░██║██║████╗░████║ ██║░░██║██║░░██║░░░██║░░░╚██╗░██╔╝██║██╔████╔██║
 " ██║░░██║██║░░██║░░░██║░░░░╚████╔╝░██║██║╚██╔╝██║
 " ██████╔╝╚█████╔╝░░░██║░░░░░╚██╔╝░░██║██║░╚═╝░██║
 " ╚═════╝░░╚════╝░░░░╚═╝░░░░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝
-
 
 
 " ================================================
@@ -30,8 +28,7 @@ set termguicolors
 set scrolloff=8
 set signcolumn=yes
 "set cmdheight=2
-
-
+"
 "let g:indentLine_setColors = 2
 let g:javascript_plugin_jsdoc = 1
 let g:pymode_syntax_space_errors = 0
@@ -64,17 +61,18 @@ filetype plugin on
 nmap <C-n> :CHADopen<CR>
 nnoremap <C-p> :MarkdownPreview<CR>
 vnoremap <C-y> "+y
-nnoremap <C-Left> :tabprevious<CR>
-nnoremap <C-Right> :tabnext<CR>
+"nnoremap <C-Left> :tabprevious<CR>
+"nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-j> :ALENext<CR>
 nnoremap <C-k> :ALEPrevious<CR>
 autocmd BufRead,BufNewFile *.py let python_highlight_all=1
 autocmd FileType python map <buffer> <F10> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType c map <buffer> <F10> :w<CR>:!gcc -g % -o %< && ./%< <CR>
+autocmd FileType c ClangFormatAutoEnable
 autocmd FileType javascript map <buffer> <F10> :w<CR>:!node % <CR>
 autocmd FileType javascript  setlocal shiftwidth=2 softtabstop=2
 autocmd FileType simula setlocal shiftwidth=4 softtabstop=4
-"autocmd FileType c setlocal ts=4 sw=4
+autocmd FileType c setlocal ts=4 sw=4
 "autocmd FileType cpp setlocal ts=4 sw=4
 "autocmd FileType go setlocal ts=4 sw=4
 "autocmd BufWritePost *.py call flake8#Flake8()
@@ -108,10 +106,11 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'}
 " Plug 'tpope/vim-markdown'
 Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'arcticicestudio/nord-vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'vimwiki/vimwiki'
 Plug 'ferrine/md-img-paste.vim'
 Plug 'mhinz/vim-startify'
@@ -121,27 +120,57 @@ Plug 'neovim/nvim-lspconfig'
 " Plug 'williamboman/nvim-lsp-installer', {'branch': 'master'}
 Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}
 Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
+Plug 'hrsh7th/cmp-omni', {'branch': 'main'}
 Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
+Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
+Plug 'hrsh7th/vim-vsnip', {'branch': 'main'}
+Plug 'rafamadriz/friendly-snippets', {'branch': 'main'}
 Plug 'jiangmiao/auto-pairs'
+Plug 'rhysd/vim-clang-format'
+Plug 'lervag/vimtex'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+
+
 
 
 call plug#end()            " required
 
 let mapleader = " "
 
+" Telescope
+nnoremap <leader>f <cmd>Telescope find_files<cr>
+nnoremap <leader>r <cmd>Telescope live_grep<cr>
+nnoremap <leader><TAB> <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>g <cmd>Telescope git_files<cr>
+
+"lua require('telescope').setup({defaults = {layout_config = {width = 0.95 }}})
+
+"lua require('hologram').setup{auto_display = true}
+
+
+
 " ================================================
 "                     FZF
 " ================================================
-nnoremap <silent> <Leader><TAB> :Buffers<CR>
-nnoremap <silent> <C-f> :Files<CR>
-nnoremap <silent> <Leader>r :Rg<CR>
+" nnoremap <silent> <Leader><TAB> :Buffers<CR>
+" nnoremap <silent> <C-f> :Files<CR>
+" nnoremap <silent> <Leader>r :Rg<CR>
 
 " ================================================
 " Git
-nnoremap <silent> <Leader>f :GFiles<CR>
+" nnoremap <silent> <Leader>f :GFiles<CR>
 
 " ================================================
-"colorscheme
+
+
+nnoremap <C-left> :vertical resize -5<cr>
+nnoremap <C-down> :resize +5<cr>
+nnoremap <C-up> :resize -5<cr>
+nnoremap <C-right> :vertical resize +5<cr>
+
+" colorscheme
 set t_co=256
 set termguicolors
 set background=dark
@@ -152,19 +181,19 @@ if !has('nvim')
 endif
 
 "let g:jedi#auto_vim_configuration = 0
-
 " ================================================
 " floating fzf
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8, 'highlight': 'Comment' } }
+" let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8, 'highlight': 'Comment' } }
 
 " ================================================
 "                     ALE
 " ================================================
+" 'python': ['black', 'isort'],
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
     \'*': ['remove_trailing_lines', 'trim_whitespace'],
     \'javascript': ['eslint', 'prettier'],
-    \'python': ['black', 'isort'],
+    \'python': ['black'],
     \'typescript': ['prettier', 'eslint'],
     \'typescriptreact': ['prettier', 'eslint'],
     \'yaml': ['prettier'],
@@ -184,6 +213,11 @@ let g:ale_linters = {
 let g:ale_python_flake8_options = '--ignore=E501'
 let g:ale_java_google_java_format_options= '--aosp'
 let g:ale_disable_lsp = 1
+
+" clangd
+let g:clang_format#style_options = {
+            \ "BasedOnStyle" : "chromium",
+            \ "IndentWidth": 4}
 
 " ================================================
 "                   Startify
@@ -212,8 +246,9 @@ let g:startify_lists = [
 " Render markdown with python
 function! MarkdownView()
     execute ':cd %:p:h'
-"    execute '!' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --listings --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
-    execute '!' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
+    execute '!' . 'pandoc --template eisvogel --listings --number-sections '  '%' . ' -o ' . '%<' . '.pdf'
+"    execute '!' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --listings --number-sections --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
+"    execute '!' . 'docker run --rm --volume "`pwd`:/data" pandoc-template --template eisvogel --pdf-engine xelatex'  '%' . ' -o ' . '%<' . '.pdf'
 endfunction
 nnoremap <leader>v :call MarkdownView()<cr>
 
@@ -229,6 +264,7 @@ nnoremap <leader>cd :cd %:p:h<CR>
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+
 
 " unicode symbols
 let g:airline_left_sep = '»'
@@ -262,6 +298,7 @@ autocmd BufRead,BufNewFile tsconfig.base.json set filetype=jsonc
 
 " set makeprg=
 
+set completeopt=menu,menuone,noselect,noinsert
 luafile ~/.vim/lsp_config.lua
 
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
@@ -270,11 +307,70 @@ nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> ge    <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> <leader>f    <cmd>lua vim.lsp.buf.formatting()<CR>
+" nnoremap <silent> <leader>f    <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> <leader>rn    <cmd>lua vim.lsp.buf.rename()<CR>
 
 nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
 xmap <silent> <leader>a <cmd>lua vim.lsp.buf.range_code_action()<CR>
 
-set completeopt=menuone,noselect
 autocmd FileType markdown lua require('cmp').setup.buffer { enabled = false }
+
+" auto completion
+let g:deoplete#enable_at_startup = 0
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+let g:CommandTPreferredImplementation='lua'
+
+" ================================================
+"                VimTeX
+" ================================================
+syntax enable
+
+" Viewer options: One may configure the viewer either by specifying a built-in
+" viewer method:
+let g:vimtex_view_method = 'zathura'
+
+" Or with a generic interface:
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+
+" VimTeX uses latexmk as the default compiler backend. If you use it, which is
+" strongly recommended, you probably don't need to configure anything. If you
+" want another compiler backend, you can change it as follows. The list of
+" supported backends and further explanation is provided in the documentation,
+" see ":help vimtex-compiler".
+let g:vimtex_compiler_method = 'latexmk'
+
+" Most VimTeX mappings rely on localleader and this can be changed with the
+" following line. The default is usually fine and is the symbol "\".
+let maplocalleader = ","
+
+let g:vimtex_syntax_conceal_disable = 1
+
+let g:vimtex_compiler_latexmk = {
+  \ 'options' : [
+  \ '-shell-escape',
+  \ '-verbose',
+  \ '-file-line-error',
+  \ '-synctex=1',
+  \ '-interaction=nonstopmode'
+  \]
+\}
+
+let g:vimtex_compiler_enabled = 1
+let g:vimtex_compiler_silent = 1
+
+let g:vimtex_toc_config = {
+  \ 'layer_state' : {
+  \ 'include': 0,
+  \ 'label': 0,
+  \ },
+  \ 'show_help': 0,
+\}
+
+let g:vimtex_view_forward_search_on_start = 0
+
+let g:vimtex_grammar_textidote = {
+  \ 'jar': '/home/theodor/builds/textidote.jar',
+\}

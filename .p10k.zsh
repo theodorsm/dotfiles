@@ -89,7 +89,7 @@
       # vpn_ip                # virtual private network indicator
       # ram                   # free RAM
       # load                  # CPU load
-      todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
+      # todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
       # time                  # current time
       # =========================[ Line #2 ]=========================
       newline
@@ -667,6 +667,8 @@
   typeset -g POWERLEVEL9K_NVM_FOREGROUND=70
   # Custom icon.
   # typeset -g POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_NVM_PROMPT_ALWAYS_SHOW=false
+
 
   ############[ nodeenv: node.js environment (https://github.com/ekalinin/nodeenv) ]############
   # Nodeenv color.

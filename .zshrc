@@ -39,6 +39,8 @@ alias gd="git diff"
 alias gl="git log"
 alias gld="git log --oneline --graph --decorate"
 alias code="vscodium"
+alias t="todo.sh"
+alias master="/home/theodor/Documents/notes/Research/Master/ttm4905-master-thesis"
 
 #ctf-alias
 alias stego-docker="$HOME/dotfiles/scripts/stego-docker.sh"
@@ -49,6 +51,8 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 setopt PROMPT_CR
 setopt PROMPT_SP
 export PROMPT_EOL_MARK=""
+
+typeset -g POWERLEVEL9K_NVM_SHOW_SYSTEM=false
 
 # exports
 export EDITOR=nvim
@@ -102,3 +106,4 @@ if [ -f '/home/theodor/builds/google-cloud-sdk/path.zsh.inc' ]; then . '/home/th
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/theodor/builds/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/theodor/builds/google-cloud-sdk/completion.zsh.inc'; fi
+source /usr/share/nvm/init-nvm.sh

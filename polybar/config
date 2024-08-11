@@ -63,7 +63,7 @@ bottom = false
 fixed-center = false
 wm-restack = bspwm
 monitor = DP-1
-monitor-fallback = DP-2-8
+monitor-fallback = DP-1-8
 
 background = #661D1F21
 foreground = ${colors.fg}

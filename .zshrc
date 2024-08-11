@@ -41,6 +41,7 @@ alias gld="git log --oneline --graph --decorate"
 alias code="vscodium"
 alias t="todo.sh"
 alias master="/home/theodor/Documents/notes/Research/Master/ttm4905-master-thesis"
+alias vpn="~/dotfiles/scripts/vpn.sh"
 
 #ctf-alias
 alias stego-docker="$HOME/dotfiles/scripts/stego-docker.sh"

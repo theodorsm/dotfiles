@@ -32,6 +32,36 @@ width = 100%
 height = 30
 top = true
 monitor = eDP-1
+monitor-fallback = DP-2-2
+
+fixed-center = false
+wm-restack = bspwm
+
+background = #001D1F21
+foreground = ${colors.fg}
+
+font-0 = "Inconsolata Nerd Font:style=Medium:size=14;2"
+font-1 = "Inconsolata Nerd Font:style=Bold:size=12;2"
+font-2 = "Inconsolata Nerd Font:size=12;3"
+font-3 = "Inconsolata Nerd Font:size=12;4"
+
+modules-left = session bspwm date
+modules-center = title
+modules-right = cpu memory pulseaudio battery-status
+
+
+tray-background = ${colors.nord-blue}
+tray-position = right
+tray-maxsize = 16
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/main-1440]
+width = 100%
+height = 30
+top = true
+monitor = DP-2-2
 
 fixed-center = false
 wm-restack = bspwm
@@ -62,8 +92,8 @@ height = 30
 bottom = false
 fixed-center = false
 wm-restack = bspwm
-monitor = DP-1
-monitor-fallback = DP-1-8
+;monitor = DP-2
+monitor = eDP-1
 
 background = #661D1F21
 foreground = ${colors.fg}

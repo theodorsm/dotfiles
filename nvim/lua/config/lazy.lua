@@ -6,6 +6,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
+-- filter which-key warnings
+local orig_notify = vim.notify
+vim.notify = function(msg, level, opts)
+  if msg:match("which") then
+    return
+  end
+  orig_notify(msg, level, opts)
+end
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
@@ -26,6 +35,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
+
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = { enabled = false }, -- automatically check for plugin updates
   performance = {

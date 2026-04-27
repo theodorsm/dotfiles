@@ -8,11 +8,11 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf) source $ZSH/oh-my-zsh.sh
+plugins=(git zsh-autosuggestions fzf) source $ZSH/oh-my-zsh.sh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
-ZSH_HIGHLIGHT_STYLES[precommand]=fg=white
-ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=white
-ZSH_HIGHLIGHT_STYLES[arg0]=fg=white
+# ZSH_HIGHLIGHT_STYLES[precommand]=fg=white
+# ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=white
+# ZSH_HIGHLIGHT_STYLES[arg0]=fg=white
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 KEYTIMEOUT=1

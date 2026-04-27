@@ -4,7 +4,11 @@
 
 vim.wo.wrap = true
 
+vim.opt.colorcolumn = "79"
+
 vim.opt.relativenumber = false
+
+vim.o.background = "dark"
 
 -- Airline symbols
 vim.g.airline_left_sep = ""
@@ -28,3 +32,4 @@ vim.api.nvim_exec(
 
 -- Disable trailing whitespace
 vim.opt.list = false
+vim.g.snacks_animate = false

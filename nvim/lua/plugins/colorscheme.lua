@@ -1,9 +1,11 @@
 return {
   { "RRethy/nvim-base16" },
+  { "Mofiqul/dracula.nvim" },
   {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "base16-tomorrow-night",
-    },
+    "maxmx03/solarized.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
   },
+  { "LazyVim/LazyVim", opts = { colorscheme = "dracula" } },
 }
